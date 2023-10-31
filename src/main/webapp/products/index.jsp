@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<img src="/assets/air force 1.PNG">
+<img src="../assets/air force 1.PNG">
 </body>
 </html>
