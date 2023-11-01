@@ -5,10 +5,10 @@ public class Product {
     private String name;
     private double price;
     private String description;
-    private int status;
+    private boolean status;
     private int categoryId;
 
-    public Product(int id, String name, double price, String description, int status, int categoryId) {
+    public Product(int id, String name, double price, String description, boolean status, int categoryId) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -17,7 +17,7 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public Product(String name, double price, String description, int status, int categoryId) {
+    public Product(String name, double price, String description, boolean status, int categoryId) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -57,11 +57,11 @@ public class Product {
         this.description = description;
     }
 
-    public int getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
