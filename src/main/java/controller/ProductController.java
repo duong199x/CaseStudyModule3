@@ -10,7 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProductController", value = "/productmanager")
+@WebServlet(name = "ProductController", value = "/admin/product")
 public class ProductController extends HttpServlet {
     private IProductService productIService = new ProductService();
 
@@ -18,7 +18,7 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         switch (action) {
-            case "productmanager":
+            case "admin":
                 showProductManager(request, response);
                 break;
 

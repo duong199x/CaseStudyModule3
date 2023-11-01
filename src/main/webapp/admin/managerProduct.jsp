@@ -31,7 +31,7 @@
             <td>${item.price}</td>
             <td>${item.description}</td>
             <td>${item.status}</td>
-            <td>${item.categoryId}</td>
+            <td>${item.categoryId.name}</td>
             <td>
                 <button><a href="http://localhost:8080/products?action=edit&id=${item.id}"> Edit</a></button>
             </td>
