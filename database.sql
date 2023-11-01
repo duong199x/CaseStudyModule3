@@ -104,3 +104,4 @@ values (1, 1, 2, 1);
 alter table orderdetail drop column status;
 alter table `order` add column (status int);
 update `order` set status = 1 where id = 1;
+select product.*,c.name as brand from product join category c on product.categoryId = c.íd;

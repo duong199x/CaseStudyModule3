@@ -6,9 +6,9 @@ public class Product {
     private double price;
     private String description;
     private boolean status;
-    private int categoryId;
+    private Category categoryId;
 
-    public Product(int id, String name, double price, String description, boolean status, int categoryId) {
+    public Product(int id, String name, double price, String description, boolean status, Category categoryId) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -17,7 +17,7 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public Product(String name, double price, String description, boolean status, int categoryId) {
+    public Product(String name, double price, String description, boolean status, Category categoryId) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -65,11 +65,11 @@ public class Product {
         this.status = status;
     }
 
-    public int getCategoryId() {
+    public Category getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Category categoryId) {
         this.categoryId = categoryId;
     }
 }
