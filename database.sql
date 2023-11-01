@@ -101,3 +101,6 @@ values ('abc.jpg', 3);
 insert into orderdetail(orderId, productId, quantityBuy, status)
 values (1, 1, 2, 1);
 # data query
+alter table orderdetail drop column status;
+alter table `order` add column (status int);
+update `order` set status = 1 where id = 1;
