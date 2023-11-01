@@ -1,5 +1,6 @@
 package services;
 
+import model.Category;
 import model.Product;
 import services.IService.IProductService;
 
@@ -31,7 +32,7 @@ public class ProductService implements IProductService<Product> {
     @Override
     public List<Product> findAll() {
         List<Product> productList = new ArrayList<>();
-        String sql = "select * from product;";
+        String sql = "select product.*,c.name as brand from product join category c on product.categoryId = c.íd;";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
@@ -42,7 +43,9 @@ public class ProductService implements IProductService<Product> {
                 String description = resultSet.getString("description");
                 boolean status = resultSet.getBoolean("status");
                 int categoryId = resultSet.getInt("categoryId");
-                Product product = new Product(id, name, price, description, status, categoryId);
+                String nameCategory = resultSet.getString("brand");
+                Category category = new Category(categoryId,nameCategory);
+                Product product = new Product(id, name, price, description, status, category);
                 productList.add(product);
             }
         } catch (SQLException e) {
