@@ -58,7 +58,9 @@ public class UserService implements IUserService<User> {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            return getUserInfo(rs);
+            while (rs.next()) {
+                return getUserInfo(rs);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,8 +72,12 @@ public class UserService implements IUserService<User> {
         String sql = "SELECT * FROM user WHERE email like ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
-            return getUserInfo(rs);
+            while (rs.next()) {
+                return getUserInfo(rs);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -79,13 +85,13 @@ public class UserService implements IUserService<User> {
     }
 
     private static User getUserInfo(ResultSet rs) throws SQLException {
-        int id = rs.getInt("id");
-        String email = rs.getString("email");
-        String password = rs.getString("password");
-        String nickname = rs.getString("nickname");
-        String phone = rs.getString("phone");
-        String address = rs.getString("address");
-        int role = rs.getInt("role");
-        return new User(id, email, password, nickname, phone, address, role);
+            int id = rs.getInt("id");
+            String email = rs.getString("email");
+            String password = rs.getString("password");
+            String nickname = rs.getString("nickname");
+            String phone = rs.getString("phone");
+            String address = rs.getString("address");
+            int role = rs.getInt("role");
+            return new User(id, email, password, nickname, phone, address, role);
     }
 }

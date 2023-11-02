@@ -26,17 +26,33 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         if (action == null) {
-            action = "details";
+            action = "login";
         }
         switch (action) {
             case "login":
-                req.getRequestDispatcher("/login/login.jsp").forward(req, resp);
+                getLogin(req, resp);
+                break;
+            case "details":
                 break;
             case "logout":
+                doLogout(req, resp);
                 break;
             default:
                 resp.sendRedirect("/notfound");
         }
+    }
+
+    private void getLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        if (SesionAuth.checkUser(req)) {
+        } else {
+            req.getRequestDispatcher("/login/login.jsp").forward(req, resp);
+        }
+    }
+
+    private void doLogout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession session = req.getSession(false);
+        session.invalidate();
+        resp.sendRedirect("/user");
     }
 
     @Override
@@ -44,13 +60,7 @@ public class UserController extends HttpServlet {
         String action = req.getParameter("action");
         switch (action) {
             case "login":
-                if(SesionAuth.checkUser(req)){
-
-                }else if(SesionAuth.chekAdmin(req)){
-
-                }else {
-                    doLogin(req, resp);
-                }
+                doLogin(req, resp);
                 break;
         }
     }
@@ -58,23 +68,24 @@ public class UserController extends HttpServlet {
     private void doLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        User user = userService.findByEmail(email);
+        User user = checkLogin(email, password);
         if (user != null) {
-            checkLogin(req, user, password);
-        }else {
+            HttpSession session = req.getSession();
+            session.setAttribute("userAuth", user.getEmail());
+            session.setAttribute("user_nickname", user.getNickname());
+        } else {
             req.setAttribute("error", "Email or password do not match");
-            req.getRequestDispatcher("/login/login.jsp").forward(req,resp);
+            req.getRequestDispatcher("/login/login.jsp").forward(req, resp);
         }
     }
 
-    private static void checkLogin(HttpServletRequest req, User user, String password) {
-        if(user.getPassword().equals(password)){
-            HttpSession session = req.getSession();
-            if(user.getRole()==1){
-                session.setAttribute("adminAuth", user.getNickname());
-            }else {
-                session.setAttribute("userAuth", user.getNickname());
+    private User checkLogin(String email, String password) {
+        User user = userService.findByEmail(email);
+        if (user != null) {
+            if (user.getPassword().equals(password)) {
+                return user;
             }
         }
+        return null;
     }
 }

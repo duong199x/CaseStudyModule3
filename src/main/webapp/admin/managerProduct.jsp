@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<button><a href="">Logout</a></button>
+<button><a href="http://localhost:8080/login?action=logout">Logout</a></button>
 <h1>Danh sách sản phẩm</h1>
 <button><a href="http://localhost:8080/admin/product?action=create" type="button">Add</a></button>
 <table border="1px solid black" style="border-collapse: collapse">
