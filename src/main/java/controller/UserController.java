@@ -44,7 +44,6 @@ public class UserController extends HttpServlet {
 
     private void getLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         if (SesionAuth.checkUser(req)) {
-
         } else {
             req.getRequestDispatcher("/login/login.jsp").forward(req, resp);
         }
@@ -82,7 +81,7 @@ public class UserController extends HttpServlet {
 
     private User checkLogin(String email, String password) {
         User user = userService.findByEmail(email);
-        if(user != null){
+        if (user != null) {
             if (user.getPassword().equals(password)) {
                 return user;
             }

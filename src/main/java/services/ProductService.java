@@ -32,7 +32,7 @@ public class ProductService implements IProductService<Product> {
     @Override
     public List<Product> findAll() {
         List<Product> productList = new ArrayList<>();
-        String sql = "select product.*,c.name as brand from product join category c on product.categoryId = c.íd;";
+        String sql = "select product.*,c.name as brand from product join category c on product.categoryId = c.id;";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();

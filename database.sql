@@ -21,7 +21,7 @@ create table `order`
 );
 create table category
 (
-    íd   int primary key auto_increment,
+    id   int primary key auto_increment,
     name varchar(255) not null
 );
 create table product
@@ -32,7 +32,7 @@ create table product
     description text,
     status      boolean,
     categoryId  int,
-    foreign key (categoryId) references category (íd)
+    foreign key (categoryId) references category (id)
 );
 create table size
 (
@@ -104,4 +104,4 @@ values (1, 1, 2, 1);
 alter table orderdetail drop column status;
 alter table `order` add column (status int);
 update `order` set status = 1 where id = 1;
-select product.*,c.name as brand from product join category c on product.categoryId = c.íd;
+select product.*,c.name as brand from product join category c on product.categoryId = c.id;
