@@ -21,7 +21,7 @@ create table `order`
 );
 create table category
 (
-    id   int primary key auto_increment,
+    íd   int primary key auto_increment,
     name varchar(255) not null
 );
 create table product
@@ -32,7 +32,7 @@ create table product
     description text,
     status      boolean,
     categoryId  int,
-    foreign key (categoryId) references category (id)
+    foreign key (categoryId) references category (íd)
 );
 create table size
 (
@@ -104,4 +104,11 @@ values (1, 1, 2, 1);
 alter table orderdetail drop column status;
 alter table `order` add column (status int);
 update `order` set status = 1 where id = 1;
-select product.*,c.name as brand from product join category c on product.categoryId = c.id;
+select product.*,c.name as brand from product join category c on product.categoryId = c.íd;
+insert into product(name, price, description, status, categoryId)
+values ('nike jordan', 50000, 'đen trắng', false, 1);
+insert into product(name, price, description, status, categoryId) values (?,?,?,?,?);
+select * from category;
+ALTER TABLE category
+    RENAME COLUMN íd to id;
+select product.*,c.name as brand from product join category c on product.categoryId = c.id where product.id=1;

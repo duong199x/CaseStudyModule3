@@ -8,8 +8,13 @@ public class Category {
         this.id = id;
         this.name = name;
     }
-    public Category( String name) {
+
+    public Category(String name) {
         this.name = name;
+    }
+
+    public Category(int id) {
+        this.id = id;
     }
 
     public int getId() {

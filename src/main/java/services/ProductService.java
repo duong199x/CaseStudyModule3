@@ -16,16 +16,52 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public boolean add(Product product) {
-        return false;
+        String sql = "insert into product(name, price, description, status, categoryId) values (?,?,?,?,?);";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, product.getName());
+            statement.setDouble(2, product.getPrice());
+            statement.setString(3, product.getDescription());
+            statement.setBoolean(4, product.getStatus());
+            statement.setInt(5, product.getCategoryId().getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
     @Override
     public boolean edit(Product product, int id) {
+        String sql = "update product set name =?, price =?,description =?, status =?,categoryId=? where id =?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, product.getName());
+            statement.setDouble(2, product.getPrice());
+            statement.setString(3, product.getDescription());
+            statement.setBoolean(4, product.getStatus());
+            statement.setInt(5, product.getCategoryId().getId());
+            statement.setInt(6, id);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean delete(int id) {
+        String sql = "delete from product where id = ?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
@@ -44,7 +80,7 @@ public class ProductService implements IProductService<Product> {
                 boolean status = resultSet.getBoolean("status");
                 int categoryId = resultSet.getInt("categoryId");
                 String nameCategory = resultSet.getString("brand");
-                Category category = new Category(categoryId,nameCategory);
+                Category category = new Category(categoryId, nameCategory);
                 Product product = new Product(id, name, price, description, status, category);
                 productList.add(product);
             }
@@ -57,6 +93,26 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public Product findProductById(int id) {
-        return null;
+        String sql = "select product.*,c.name as brand from product join category c on product.categoryId = c.id where product.id=?;";
+        Product product = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                boolean status = resultSet.getBoolean("status");
+                int categoryId = resultSet.getInt("categoryId");
+                String nameCategory = resultSet.getString("brand");
+                Category category = new Category(categoryId, nameCategory);
+                product = new Product(id, name, price, description, status, category);
+                return product;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return product;
     }
 }
