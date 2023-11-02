@@ -1,0 +1,15 @@
+body {
+    background-color: black;
+}
+.logout{
+    color: white;
+    font-family: Courier New, Courier, Monaco;
+}
+.body h1{
+    color: white;
+    font-family: Courier New, Courier, Monaco;
+}
+th td{
+    color: white;
+    font-family: Courier New, Courier, Monaco;
+}
