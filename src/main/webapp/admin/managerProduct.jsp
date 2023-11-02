@@ -46,12 +46,6 @@
             <td>
                 <button onclick="confirmFunction('/admin/product?action=delete&id=${item.id}')">Delete</button>
             </td>
-            <td>
-                <button onclick="confirmFunction('/products?action')">Add Size</button>
-            </td>
-            <td>
-                <button onclick="confirmFunction('/products?action}')">Add Image</button>
-            </td>
         </tr>
 
     </c:forEach>

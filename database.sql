@@ -112,3 +112,6 @@ select * from category;
 ALTER TABLE category
     RENAME COLUMN íd to id;
 select product.*,c.name as brand from product join category c on product.categoryId = c.id where product.id=1;
+insert into size(size, quantity, productId) values (?,?,?);
+ALTER TABLE size
+    MODIFY COLUMN size varchar(10);
