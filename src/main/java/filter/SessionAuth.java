@@ -3,20 +3,20 @@ package filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class SesionAuth {
-    public static boolean checkUser(HttpServletRequest request){
+public class SessionAuth {
+    public static boolean checkAuthentication(HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if(session != null){
-            if (session.getAttribute("userAuth")!=null){
+            if (session.getAttribute("authentication")!=null){
                 return true;
             }
         }
         return false;
     }
-    public static boolean chekAdmin(HttpServletRequest request){
+    public static boolean isAdmin(HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if(session != null){
-            if (session.getAttribute("adminAuth")!=null){
+            if (session.getAttribute("role").equals("admin")){
                 return true;
             }
         }
