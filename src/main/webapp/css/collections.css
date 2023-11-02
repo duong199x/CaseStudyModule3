@@ -1,18 +1,20 @@
-body {
-    background-color: black;
+body {background-color: black}
+.cart a{
+    padding-top: 10px;
 }
-
 .header {
     width: 100%;
     height: 100px;
 }
-
 .login {
     width: 100%;
 }
 
 .button-login {
     float: left;
+}
+.button-login a{
+
 }
 
 .login-user, .register {
@@ -21,10 +23,10 @@ body {
     font-family: Courier New, Courier, Monaco;
 }
 
+
 .login-user:hover, .register:hover {
     color: red;
 }
-
 .logo {
     width: 100%;
     height: 80%;
@@ -39,12 +41,12 @@ body {
 
 .logo p {
     color: white;
+    font-family: Courier New, Courier, Monaco;
 }
 
 .logo p:hover {
     color: red;
 }
-
 #clock {
     color: white;
     font-family: Courier New, Courier, Monaco;
@@ -53,84 +55,78 @@ body {
 #clock:hover {
     color: red;
 }
-
-.body {
-    width: 100%;
-    height: 60%;
+.body{
     margin-top: 100px;
-}
-
-.list-product {
-    color: white;
-    font-family: Courier New, Courier, Monaco;
-}
-
-.list-product:hover {
-    color: red;
-}
-
-.body h4 {
-    color: white;
-    font-family: Courier New, Courier, Monaco;
-}
-
-.body h3 {
-    color: white;
-}
-
-#carouselExampleDark {
-    width: 60%;
-}
-
-.footer {
     width: 100%;
-    height: 50px;
-    margin-top: 200px;
-    float: left;
+    height: calc(100% - 200px - 10%);
 }
-
-.footer a {
+ul li  {
+    color: white;
     list-style: none;
+    font-family: Courier New, Courier, Monaco;
+
+}
+a{
+    color: white;
+}
+a:hover{
+    color: red;
+}
+.item{
+    width: calc(100% / 3 - 16px);
+    height: 250px;
+    border: 1px solid;
     float: left;
-    margin: 0 10px;
+    margin-left: 10px;
+    margin-top: 10px;
     color: white;
-    padding-right: 20px;
+    font-family: Courier New, Courier, Monaco;
+}
+.item:hover{
+    border-color: red ;
+}
+.image-product{
+    width: 100%;
+    height: 80%;
+}
+.describe {
+    font-family: Courier New, Courier, Monaco;
+}
+.footer{
+    margin-top: 10px;
+    width: 100%;
+    height: 10%;
+}
+.pagination{
+    justify-content: center;
+}
+
+.page-item .page-link{
+    color: white;
+    background-color: black;
+    border: 1px solid white;
     font-family: Courier New, Courier, Monaco;
 }
 
-.footer a:hover {
+.page-item .page-link:hover{
+    background-color: transparent;
     color: red;
+    text-decoration: underline;
 }
-
-.information p {
-    color: white;
-    padding-right: 10px;
-    font-family: Courier New, Courier, Monaco;
-}
-
-.information p:hover {
-    color: red;
-}
-
 img {
-    height: 350px;
+    height: 100%;
     width: 100%;
     object-fit: contain;
 }
-
 @media only screen and (max-width: 700px) {
-    .slide {
-        height: 50%;
+    .main-left , .main-right{
+        display: none;
+    }
+    .item{
+        width: 100%;
     }
 
 }
-
-
-
-
-
-
-
 
 
 
