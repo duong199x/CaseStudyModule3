@@ -1,0 +1,13 @@
+
+* {
+    box-sizing: border-box;
+}
+.product-image{
+    width: 150px;
+}
+.input-quantity{
+    width: 50px;
+}
+.input-image{
+    border-radius: 50px;
+}

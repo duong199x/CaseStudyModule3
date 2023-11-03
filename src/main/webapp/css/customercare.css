@@ -1,0 +1,13 @@
+.body label, option, h3, button{
+    color: white;
+    font-family: Courier New, Courier, Monaco;
+}
+.body input {
+    width: 50%;
+}
+.form-control, .form-group{
+    width: 50%;
+}
+body button{
+    background: red;
+}

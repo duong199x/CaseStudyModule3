@@ -357,9 +357,9 @@
                                     </td>
 
                                     <td class="align-middle">
-                                        <button class="btn bg-gradient-success"><a
-                                                href="http://localhost:8080/admin/product?action=edit&id=${item.id}">
-                                            Edit</a></button>
+                                        <a href="http://localhost:8080/admin/product?action=edit&id=${item.id}">
+                                        <button class="btn bg-gradient-success">Edit</button>
+                                        </a>
                                         <button class="btn bg-gradient-danger"
                                                 onclick="confirmFunction('/admin/product?action=delete&id=${item.id}')">
                                             Delete
