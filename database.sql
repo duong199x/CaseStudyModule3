@@ -112,3 +112,44 @@ select * from category;
 ALTER TABLE category
     RENAME COLUMN íd to id;
 select product.*,c.name as brand from product join category c on product.categoryId = c.id where product.id=1;
+insert into size(size, quantity, productId) values (?,?,?);
+#thay đổi kiểu dữ liệu size
+ALTER TABLE size
+    MODIFY COLUMN size varchar(10);
+# thêm cột deleteFlag
+ALTER TABLE product
+    ADD productFlag boolean;
+alter table product
+RENAME COLUMN productFlag to deleteFlag;
+select product.*,c.name as brand from product join category c on product.categoryId = c.id and product.deleteFlag = 0;
+update product set product.deleteFlag = 1 where id = ?;
+# tạo trigger thêm product tự tạo size
+DELIMITER //
+create trigger InsertSize
+    AFTER INSERT ON product
+    for each row
+    begin
+    insert into size(size, quantity, productId) values (38,null,NEW.id);
+    insert into size(size, quantity, productId) values (39,null,NEW.id);
+    insert into size(size, quantity, productId) values (40,null,NEW.id);
+    insert into size(size, quantity, productId) values (41,null,NEW.id);
+    insert into size(size, quantity, productId) values (42,null,NEW.id);
+    insert into size(size, quantity, productId) values (43,null,NEW.id);
+    insert into size(size, quantity, productId) values (44,null,NEW.id);
+    insert into size(size, quantity, productId) values (45,null,NEW.id);
+        end;
+        //
+DELIMITER ;
+insert into product(name, price, description, status, categoryId,deleteFlag) values ('nike2',3000000,'đen trắng đỏ',0,1,0);
+update size set size=?, quantity=? , productId =? where id =?;
+DELIMITER //
+create trigger InsertImage
+    AFTER INSERT ON product
+    for each row
+begin
+    insert into image(image, productId) values ('',NEW.id);
+    insert into image(image, productId) values ('',NEW.id);
+    insert into image(image, productId) values ('',NEW.id);
+end;
+//
+DELIMITER ;
