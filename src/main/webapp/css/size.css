@@ -105,3 +105,10 @@ table tr ,th{
 .tab-list{
     margin-top: 20px;
 }
+.product-size-table p{
+    color: white;
+    font-family: Courier New, Courier, Monaco;
+}
+.font-courier{
+    font-family: Courier New, Courier, Monaco;
+}
