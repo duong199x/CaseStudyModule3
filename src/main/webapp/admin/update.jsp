@@ -57,5 +57,47 @@
     </select>
     <button>Submit</button>
 </form>
+<table border="1px solid black">
+    <tr>
+        <th>Id</th>
+        <th>Size</th>
+        <th>Quantity</th>
+        <th>ProductId</th>
+        <th>Action</th>
+    </tr>
+    <c:forEach var="item" items="${sizeList}">
+        <form action="product?action=editsize" method="post">
+            <tr>
+                <td>${item.id}</td>
+                <td><input name="size" value="${item.size}" style="display: none">${item.size}</td>
+                <td><input type="text" name="quantity" placeholder="${item.quantity}" value="${item.quantity}"></td>
+                <td><input name="productId" value="${item.productId}" style="display: none">${item.productId}</td>
+                <td>
+                    <button>Edit</button>
+                </td>
+            </tr>
+        </form>
+    </c:forEach>
+</table>
+<table border="1px solid black">
+    <tr>
+        <th>Id</th>
+        <th>Image</th>
+        <th>ProductId</th>
+        <th>Action</th>
+    </tr>
+    <c:forEach var="item" items="${imageList}">
+        <form action="product?action=editimage" method="post">
+            <tr>
+                <td><input name="id" value="${item.id}" style="display: none">${item.id}</td>
+                <td><input name="image" value="${item.image}"></td>
+                <td><input name="productId" value="${item.productId}" style="display: none">${item.productId}</td>
+                <td>
+                    <button>Edit</button>
+                </td>
+            </tr>
+        </form>
+    </c:forEach>
+</table>
 </body>
 </html>

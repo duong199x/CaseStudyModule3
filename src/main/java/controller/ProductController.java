@@ -1,11 +1,17 @@
 package controller;
 
 import model.Category;
+import model.Image;
 import model.Product;
+import model.Size;
 import services.CategoryServices;
 import services.IService.ICategoryService;
+import services.IService.IImageService;
 import services.IService.IProductService;
+import services.IService.ISizeService;
+import services.ImageService;
 import services.ProductService;
+import services.SizeService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -17,6 +23,8 @@ import java.util.List;
 public class ProductController extends HttpServlet {
     private final IProductService<Product> productIService = new ProductService();
     private final ICategoryService<Category> categoryService = new CategoryServices();
+    private final ISizeService<Size> sizeISizeService = new SizeService();
+    private final IImageService<Image> imageIImageService = new ImageService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,6 +53,10 @@ public class ProductController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/update.jsp");
         List<Category> categoryList = categoryService.findAll();
         request.setAttribute("categoryList", categoryList);
+        List<Size> sizeList = sizeISizeService.findAllSizeByProductId(id);
+        request.setAttribute("sizeList", sizeList);
+        List<Image> imageList = imageIImageService.findAllImageByProductId(id);
+        request.setAttribute("imageList", imageList);
         dispatcher.forward(request, response);
     }
 
@@ -78,7 +90,31 @@ public class ProductController extends HttpServlet {
             case "edit":
                 editProduct(request, response);
                 break;
+            case "editsize":
+                editSize(request, response);
+                break;
+            case "editimage":
+                editImage(request,response);
+                break;
         }
+    }
+
+    private void editImage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String image = request.getParameter("image");
+        int productId = Integer.parseInt(request.getParameter("productId"));
+        Image image1 = new Image(id,image,productId);
+        imageIImageService.edit(image1, productId, id);
+        response.sendRedirect("/admin/product?action=edit&id=" + productId);
+    }
+
+    private void editSize(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String size = request.getParameter("size");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        int productId = Integer.parseInt(request.getParameter("productId"));
+        Size size1 = new Size(size, quantity, productId);
+        sizeISizeService.edit(size1, productId, size);
+        response.sendRedirect("/admin/product?action=edit&id=" + productId);
     }
 
     private void createProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -103,7 +139,7 @@ public class ProductController extends HttpServlet {
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         Category category = categoryService.findProductById(categoryId);
         category.getName();
-        Product product = new Product(name, price, description,status,category);
+        Product product = new Product(name, price, description, status, category);
         productIService.edit(product, id);
         response.sendRedirect("/admin/product?action=admin");
     }

@@ -16,7 +16,7 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public boolean add(Product product) {
-        String sql = "insert into product(name, price, description, status, categoryId) values (?,?,?,?,?);";
+        String sql = "insert into product(name, price, description, status, categoryId,deleteFlag) values (?,?,?,?,?,0);";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
@@ -34,7 +34,7 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public boolean edit(Product product, int id) {
-        String sql = "update product set name =?, price =?,description =?, status =?,categoryId=? where id =?;";
+        String sql = "update product set name =?, price =?,description =?, status =?,categoryId=? where id =? and product.deleteFlag = 0;";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
@@ -53,7 +53,7 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public boolean delete(int id) {
-        String sql = "delete from product where id = ?;";
+        String sql = "update product set product.deleteFlag = 1 where id = ?;";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
@@ -68,7 +68,7 @@ public class ProductService implements IProductService<Product> {
     @Override
     public List<Product> findAll() {
         List<Product> productList = new ArrayList<>();
-        String sql = "select product.*,c.name as brand from product join category c on product.categoryId = c.id;";
+        String sql = "select product.*,c.name as brand from product join category c on product.categoryId = c.id and product.deleteFlag = 0;";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
