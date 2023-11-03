@@ -97,7 +97,7 @@
             </div>
         </div>
 
-        <div><a href="" class="list-product">Danh sách sản phẩm</a></div>
+        <div><a href="/products/collections.jsp" class="list-product">Danh sách sản phẩm</a></div>
     </center>
     <div class="footer">
         <div class="row">
@@ -110,8 +110,8 @@
             </div>
             <div class="col-2"></div>
             <div class="col-2">
-                <a href="" class="size">size</a>
-                <a href="" class="contact">chăm sóc khách hàng</a>
+                <a href="/products/size.jsp" class="size">size</a>
+                <a href="/products/customercare.jsp" class="contact">chăm sóc khách hàng</a>
             </div>
             <div class="col-2"></div>
         </div>

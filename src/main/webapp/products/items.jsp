@@ -123,16 +123,16 @@
             <div class="col-3 nodata"></div>
             <div class="col-3">
                 <div>
-                    <a href="">home</a>
+                    <a href="/products/home.jsp">home</a>
                     <p> >  </p>
-                    <a href="">shop</a>
+                    <a href="/products/collections.jsp">shop</a>
                 </div>
             </div>
             <div class="col-3">
                 <div>
-                    <a href="" class="size">size</a>
+                    <a href="/products/size.jsp" class="size">size</a>
                     <p> |</p>
-                    <a href="" class="contact">chăm sóc khách hàng</a>
+                    <a href="/products/customercare.jsp" class="contact">chăm sóc khách hàng</a>
                 </div>
             </div>
             <div class="col-3 nodata"></div>

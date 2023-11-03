@@ -11,7 +11,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <html>
 <head>
-    <title>WindowShop-Danh Sách Sản Phẩm</title>
+    <title>Nike - WS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -60,17 +60,10 @@
             </div>
         </div>
         <div class="body">
+            <div class="nike" style="color: white;font-family: Courier New, Courier, Monaco"><h3>Nike</h3></div>
             <div class="row">
                 <div class="col-3">
-                    <div class="main-left">
-                        <ul>
-                            <li><a href="/products/nike.jsp">Nike</a></li>
-                            <li><a href="/products/adidas.jsp">Adidas</a></li>
-                            <li><a href="/products/vans.jsp">Vans</a></li>
-                            <li><a href="/products/orther.jsp">Orther</a></li>
-
-                        </ul>
-                    </div>
+                    <a href="/products/collections.jsp" style="color: white;font-family: Courier New, Courier, Monaco"> <=Quay Lại</a>
                 </div>
                 <div class="col-6">
                     <div class="main-center">
