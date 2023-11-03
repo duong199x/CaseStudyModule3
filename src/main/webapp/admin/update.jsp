@@ -33,8 +33,6 @@
 
 </head>
 <body class="g-sidenav-show  bg-gray-200">
-<form action="http://localhost:8080/admin/product?action=edit&id=${id}" method="post">
-    <body class="g-sidenav-show  bg-gray-200">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
            id="sidenav-main">
         <div class="sidenav-header">
@@ -302,7 +300,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <form action="http://localhost:8080/admin/product?action=create" method="post">
+                                    <form action="http://localhost:8080/admin/product?action=edit&id=${id}" method="post">
                                         <tr>
                                             <th>Tên Sản Phẩm</th>
                                             <th><input type="text" name="name" value="${editProduct.name}"></th>
@@ -340,7 +338,7 @@
                                         </tr>
                                         <tr>
                                             <th>Mô Tả</th>
-                                            <th><textarea type="text" value="${editProduct.price}"></textarea></th>
+                                            <th><input type="text" name="description" value="${editProduct.description}"></th>
                                         </tr>
                                         <tr>
                                             <th>Hãng</th>
@@ -362,7 +360,7 @@
                                         <tr class="submit">
                                             <center>
                                                 <th colspan="2">
-                                                    <input type="submit" value="Thay Đổi">
+                                                    <button class="btn bg-gradient-info" type="submit">Thay Đổi</button>
                                                 </th>
                                             </center>
                                         </tr>
@@ -386,8 +384,6 @@
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <thead>
-                                    <tbody>
-                                    <form action="http://localhost:8080/admin/product?action=create" method="post">
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Các
@@ -403,19 +399,23 @@
                                                 Tính Năng
                                             </th>
                                         </tr>
-                                        <tr class="submit">
-                                            <center>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th>
-                                                    <input type="submit" value="Thay Đổi">
-                                                </th>
-                                            </center>
-                                        </tr>
-                                    </form>
-                                    </tbody>
                                     </thead>
+                                    <tbody>
+                                    <center>
+                                        <c:forEach var="item" items="${sizeList}">
+                                            <form action="product?action=editsize" method="post">
+                                                <tr>
+                                                    <td>${item.id}</td>
+                                                    <td><input  name="size" value="${item.size}" style="display: none">${item.size}</td>
+                                                    <td><input  class="input-quantity" type="text" name="quantity" placeholder="${item.quantity}" value="${item.quantity}"></td>
+                                                    <input name="productId" hidden="hidden" readonly value="${item.productId}">
+                                                    <td>
+                                                        <button class="btn bg-gradient-info" type="submit">Thay Đổi</button>
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                        </c:forEach>
+                                    </center>
                                     <tbody>
                                 </table>
                             </div>
@@ -432,6 +432,7 @@
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
+                                    <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Các
@@ -443,22 +444,28 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Ảnh Thực tế
                                         </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Chức Năng
+                                        </th>
                                     </tr>
-                                    <thead>
+                                    </thead>
                                     <tbody>
-                                    <form action="http://localhost:8080/admin/product?action=create" method="post">
-
-                                        <tr class="submit">
+                                    <c:forEach var="item" items="${imageList}">
+                                    <form action="product?action=editimage" method="post">
+                                        <tr >
                                             <center>
-                                                <th colspan="3">
-                                                    <input type="submit" value="Thay Đổi">
-                                                </th>
+                                                <td><input name="id" value="${item.id}" style="display: none">${item.id}</td>
+                                                <td><input class="input-image" name="image" value="${item.image}"></td>
+                                                <input name="productId" value="${item.productId}" readonly style="display: none">
+                                                <td><img src="${item.image}" class="product-image"></td>
+                                                <td>
+                                                    <button class="btn bg-gradient-info" type="submit">Thay Đổi</button>
+                                                </td>
                                             </center>
                                         </tr>
                                     </form>
+                                    </c:forEach>
                                     </tbody>
-                                    </thead>
-
                                 </table>
                             </div>
                         </div>
@@ -621,7 +628,5 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
-    </body>
-</form>
 </body>
 </html>

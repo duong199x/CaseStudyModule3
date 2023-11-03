@@ -12,8 +12,12 @@ import java.io.IOException;
 public class Security extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        if (SesionAuth.chekAdmin(request)) {
-            chain.doFilter(request, response);
+        if (SessionAuth.checkAuthentication(request)) {
+            if(SessionAuth.isAdmin(request)) {
+                chain.doFilter(request, response);
+            }else {
+                request.getRequestDispatcher("/error/access-denied.jsp").forward(request,response);
+            }
         } else {
             response.sendRedirect("/login");
         }

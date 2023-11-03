@@ -1,28 +1,13 @@
-input[type=submit] {
-    background-color: #04AA6D;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
 
-input[type=submit]:hover {
-    background-color: #45a049;
-    width: 20px;
-    height: 10px;
-
-}
-input[type=text], select, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-}
 * {
     box-sizing: border-box;
 }
-.submit{
-    text-align: center;
+.product-image{
+    width: 150px;
+}
+.input-quantity{
+    width: 50px;
+}
+.input-image{
+    border-radius: 50px;
 }

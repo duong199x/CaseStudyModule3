@@ -8,4 +8,5 @@ public interface IUserService<E> {
     List<E> findAll();
     E findById(int id);
     E findByEmail(String email);
+    void changePassword(int id, String password);
 }
