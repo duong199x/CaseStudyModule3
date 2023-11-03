@@ -32,7 +32,16 @@ public class UserService implements IUserService<User> {
 
     @Override
     public void edit(User user) {
-
+        String sql = "UPDATE user SET nickname = ?, address = ? WHERE id = ?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, user.getNickname());
+            ps.setString(2, user.getAddress());
+            ps.setInt(3, user.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -84,14 +93,19 @@ public class UserService implements IUserService<User> {
         return null;
     }
 
+    @Override
+    public void changePassword(int id, String password) {
+
+    }
+
     private static User getUserInfo(ResultSet rs) throws SQLException {
-            int id = rs.getInt("id");
-            String email = rs.getString("email");
-            String password = rs.getString("password");
-            String nickname = rs.getString("nickname");
-            String phone = rs.getString("phone");
-            String address = rs.getString("address");
-            int role = rs.getInt("role");
-            return new User(id, email, password, nickname, phone, address, role);
+        int id = rs.getInt("id");
+        String email = rs.getString("email");
+        String password = rs.getString("password");
+        String nickname = rs.getString("nickname");
+        String phone = rs.getString("phone");
+        String address = rs.getString("address");
+        int role = rs.getInt("role");
+        return new User(id, email, password, nickname, phone, address, role);
     }
 }

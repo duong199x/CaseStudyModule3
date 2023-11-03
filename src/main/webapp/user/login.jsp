@@ -9,12 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <title>Đăng Nhập</title>
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <title>
-        Đăng Nhập
-    </title>
-    <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
     <!-- Nucleo Icons -->
@@ -77,9 +74,12 @@
                         </div>
 
                         <div class="card-body">
-                            <c:if test="${error != null}"><span class="error animate tada" style="display: block" id="msg">${error}</span></c:if>
+                            <c:if test="${error != null}"><span class="error animate tada" style="display: block"
+                                                                id="msg">${error}</span></c:if>
                             <c:if test="${error ==null}"><span class="error animate tada" id="msg"></span></c:if>
-                            <form name="form1" action="/login" onsubmit="return Validate()" method="post" class="text-start">
+                            <form name="form1" action="http://localhost:8080/login" onsubmit="return Validate()"
+                                  method="post" class="text-start">
+                                <input type="hidden" name="action" value="login">
                                 <div class="input-group input-group-outline my-3">
                                     <label class="form-label">Email</label>
                                     <input type="text" name="email" class="form-control" autocomplete="off">
@@ -94,7 +94,8 @@
                                 </div>
                                 <p class="mt-4 text-sm text-center">
                                     bạn không có tài khoản?
-                                    <a href="#" class="text-primary text-gradient font-weight-bold">Đăng Ký</a>
+                                    <a href="http://localhost:8080/login?action=register"
+                                       class="text-primary text-gradient font-weight-bold">Đăng Ký</a>
                                 </p>
                             </form>
                         </div>
@@ -102,6 +103,26 @@
                 </div>
             </div>
         </div>
+        <c:if test="${message != null}">
+            <div class="position-fixed top-2 end-2 z-index-2">
+                <div class="toast fade hiden p-2 mt-2 bg-gradient-info" role="alert" aria-live="assertive" id="infoToast"
+                     aria-atomic="true">
+                    <div class="toast-header bg-transparent border-0">
+                        <i class="material-icons text-white me-2">
+                            check
+                        </i>
+                        <span class="me-auto text-white font-weight-bold">Shoes Shop Thông báo</span>
+                        <small class="text-white">1 giây trước</small>
+                        <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast"
+                           aria-label="Close"></i>
+                    </div>
+                    <hr class="horizontal light m-0">
+                    <div class="toast-body text-white">
+                            ${message}
+                    </div>
+                </div>
+            </div>
+        </c:if>
         <footer class="footer position-absolute bottom-2 py-2 w-100">
             <div class="container">
                 <div class="row align-items-center justify-content-lg-between">
@@ -113,7 +134,8 @@
                             </script>
                             ,
                             made with <i class="fa fa-heart" aria-hidden="true"></i> by
-                            <a href="https://www.creative-tim.com" class="font-weight-bold text-white" target="_blank">Shoes Shop Window</a>.
+                            <a href="https://www.creative-tim.com" class="font-weight-bold text-white" target="_blank">Shoes
+                                Shop Window</a>.
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -146,13 +168,6 @@
 <script src="../js/admin/plugins/perfect-scrollbar.min.js"></script>
 <script src="../js/admin/plugins/smooth-scrollbar.min.js"></script>
 <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-            damping: '0.5'
-        }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
     function Validate() {
         let email = document.form1.email;
         let password = document.form1.password;
