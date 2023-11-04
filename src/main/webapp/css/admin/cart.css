@@ -1,0 +1,22 @@
+table{
+    width: 50%;
+    height: 100%;
+    border:1px solid white;
+    box-sizing: border-box;
+    padding: 15px;
+}
+table tr ,th{
+    border: 1px solid white;
+    color: white;
+    font-family: Courier New, Courier, Monaco;
+}
+.tab-list{
+    margin-top: 20px;
+}
+.product-size-table p{
+    color: white;
+    font-family: Courier New, Courier, Monaco;
+}
+.font-courier{
+    font-family: Courier New, Courier, Monaco;
+}
