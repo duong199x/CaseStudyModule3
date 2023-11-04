@@ -115,4 +115,29 @@ public class ProductService implements IProductService<Product> {
         }
         return product;
     }
+    public List<Product> findProductByName(String nameFind){
+        List<Product> productList = new ArrayList<>();
+        String sql = "select product.*,c.name as brand from product join category c on product.categoryId = c.id and product.deleteFlag = 0 and product.name like ?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,"%"+nameFind+"%");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                boolean status = resultSet.getBoolean("status");
+                int categoryId = resultSet.getInt("categoryId");
+                String nameCategory = resultSet.getString("brand");
+                Category category = new Category(categoryId, nameCategory);
+                Product product = new Product(id, name, price, description, status, category);
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return productList;
+    }
 }
