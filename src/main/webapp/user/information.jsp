@@ -11,7 +11,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <html>
 <head>
-    <title>Giỏ Hàng - WS</title>
+    <title>Tài Khoản- WS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -23,20 +23,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="../css/size.css"/>">
 </head>
 <body>
-
 <div class="container-fluid">
-    <div class="login">
-        <div class="row">
-            <div class="col-8"></div>
-            <div class="col-4">
-                <div class="button-login">
-                    <a href="" class="login-user">Đăng Nhập</a>
-                    <a href="" class="register">Đăng Kí</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
     <center style="height: fit-content">
         <div class="header">
             <div class="row">
@@ -65,55 +52,70 @@
             <div class="product-acd-content product-content-size">
                 <div class="product-size-wrapper">
                     <div class="product-size-tab">
-                        <h3 href="#" class="tab-list active">Giỏ Hàng </h3>
+                        <h3 href="#" class="tab-list active">Thông Tin Khách Hàng </h3>
                     </div>
                     <div class="product-size-table-box">
+                        <center>
                         <table class="product-size-table-bd-1-white">
                             <thead>
                             <tr>
-                                <th>Tên Sản Phẩm</th>
-                                <th>Hình Ảnh</th>
-                                <th>Số Lượng</th>
-                                <th>Giá</th>
-                                <th>Thành Tiền</th>
-                                <th style="width: 20px;">
-                                </th>
+                                <th></th>
+                                <th>Thông Tin</th>
                             </tr>
                             </thead>
                             <tbody>
                             <form>
                                 <tr>
-                                    <td>Jordan1</td>
-                                    <td></td>
-                                    <img src="">
-                                    <td>1</td>
-                                    <td>500</td>
-                                    <td>500</td>
+                                    <th>Email</th>
+                                    <td>toandoan98@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <th>Tên Tài Khoản</th>
+                                    <td>Toan Dep Trai</td>
+                                </tr>
+                                <tr>
+                                    <th>Số Điện Thoại</th>
+                                    <td>098********</td>
+                                </tr>
+                                <tr>
+                                    <th>Địa chỉ</th>
+                                    <td>Long Bien - Ha Noi</td>
+                                </tr>
+                                <tr>
+                                    <th></th>
                                     <th>
-                                        <button class="btn-danger ">Hủy</button>
+                                        <a href="../user/details.jsp"><button class="text-white bg-danger">Thay Đổi</button></a>
                                     </th>
                                 </tr>
-
                             </form>
-                            </tbody>
-                            <tfoot>
-                            <th colspan="4">Tổng Tiền</th>
-                            <th>500</th>
-                            </tfoot>
 
                         </table>
-                        <div class="row mt-5">
-                            <div class="col-6"></div>
-                            <div class="col-3">
-                                <a>
-                                    <button class="btn-white">Quay Lại</button>
-                                </a>
-                                <button type="submit" class="btn-danger">Xác Nhận</button>
-                            </div>
-                            <div class="col-3"></div>
+                        </center>
+                        <div>
+                            <h4 class="font-courier mt-3 text-white">Lịch Sử Mua Hàng</h4>
                         </div>
-                        <!----></div>
+                        <table class="bd-1-white">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Ngày Mua</th>
+                                <th>Giá Trị</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <td>1</td>
+                            <td>1-1-2023 10:25:30</td>
+                            <td>100000</td>
+                            <td><a href="" class="text-danger">chi tiết</a></td>
+                            </tbody>
+                        </table>
+                        </tbody>
+
+
+                    </div>
                 </div>
+
             </div>
 
         </div>

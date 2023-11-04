@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="logo">
                     <img src="../assets/logo.png"><br>
-                    <p><span id="clock"></span> HN</p>
+                    <p style="font-family: Courier New, Courier, Monaco"><span id="clock"></span> HN</p>
                     <script type="text/javascript">
                         function updateClock() {
                             var now = new Date();
