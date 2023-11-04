@@ -161,3 +161,7 @@ create table cart (
         foreign key (userId) references user (id)
 )
 select product.*,c.name as brand from product join category c on product.categoryId = c.id and product.deleteFlag = 0 and product.name like ?;
+select product.*,image ,c.name as brand from product
+    join category c on product.categoryId = c.id and product.deleteFlag = 0
+    join image i on product.id = i.productId;
+alter table product add originImage text;

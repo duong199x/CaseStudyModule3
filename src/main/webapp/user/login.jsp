@@ -105,7 +105,7 @@
         </div>
         <c:if test="${message != null}">
             <div class="position-fixed top-2 end-2 z-index-2">
-                <div class="toast fade hiden p-2 mt-2 bg-gradient-info" role="alert" aria-live="assertive" id="infoToast"
+                <div class="toast fade show p-2 mt-2 bg-gradient-info" role="alert" aria-live="assertive" id="infoToast"
                      aria-atomic="true">
                     <div class="toast-header bg-transparent border-0">
                         <i class="material-icons text-white me-2">

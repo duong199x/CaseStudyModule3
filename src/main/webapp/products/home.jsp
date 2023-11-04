@@ -97,7 +97,7 @@
             </div>
         </div>
 
-        <div><a href="/products/collections.jsp" class="list-product">Danh sách sản phẩm</a></div>
+        <div><a href="/home?action=collections" class="list-product">Danh sách sản phẩm</a></div>
     </center>
     <div class="footer">
         <div class="row">

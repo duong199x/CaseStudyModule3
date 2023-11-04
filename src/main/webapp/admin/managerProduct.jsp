@@ -317,6 +317,9 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Brand
                                     </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Brand
+                                    </th>
                                     <th class="text-secondary opacity-7">Action</th>
                                 </tr>
                                 </thead>
@@ -357,7 +360,7 @@
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-xs font-weight-bold">${item.categoryId.name}</span>
                                     </td>
-
+                                    <td> <img src="${item.originImage}" width="250" alt="img"></td>
                                     <td class="align-middle">
                                         <a href="http://localhost:8080/admin/product?action=edit&id=${item.id}">
                                         <button class="btn bg-gradient-success">Edit</button>

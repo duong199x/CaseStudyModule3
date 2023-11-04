@@ -60,67 +60,21 @@
             </div>
         </div>
         <div class="body">
-            <div class="nike" style="color: white;font-family: Courier New, Courier, Monaco"><h3>Nike</h3></div>
+            <div class="nike" style="color: white;font-family: Courier New, Courier, Monaco"><h3>${category}</h3></div>
             <div class="row">
                 <div class="col-3">
-                    <a href="/products/collections.jsp" style="color: white;font-family: Courier New, Courier, Monaco"> <=Quay Lại</a>
+                    <a href="/home?action=collections" style="color: white;font-family: Courier New, Courier, Monaco"> <=Quay Lại</a>
                 </div>
                 <div class="col-6">
                     <div class="main-center">
-                        <div class="item">
-                            <a href="/products/items.jsp">
-                                <div class="image-product"><img src="../assets/adidas/adidas-yeezy-boost-350-v2-core-black-red.jpg"></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src="../assets/nike/air%20force%201.PNG"></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src="../assets/orther/vans%20old%20school.PNG"></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
+                        <c:forEach items="${listproduct}" var="item">
+                            <div class="item">
+                                <a href="/home?action=items&id=${item.id}">
+                                    <div class="image-product"><img src="${item.originImage}"></div>
+                                    <div class="describe"><p>${item.name} - ${item.price}</p></div>
+                                </a>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
                 <div class="col-3">
