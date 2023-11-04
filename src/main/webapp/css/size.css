@@ -97,7 +97,7 @@ table{
     box-sizing: border-box;
     padding: 15px;
 }
-table tr ,th{
+table tr ,th ,td{
     border: 1px solid white;
     color: white;
     font-family: Courier New, Courier, Monaco;
@@ -111,4 +111,7 @@ table tr ,th{
 }
 .font-courier{
     font-family: Courier New, Courier, Monaco;
+}
+product-size-table input{
+    border-radius: 5px;
 }

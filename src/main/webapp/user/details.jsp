@@ -11,7 +11,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <html>
 <head>
-    <title>UserDetails</title>
+    <title>Thay Đổi Thông Tin - WS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -71,7 +71,7 @@
                                 <p class="text-white font-courier">Địa chỉ</p>
                                 <input type="text" name="address" value="${address}"><br>
                                 <br>
-                                <button type="submit">Lưu Thay Đổi</button>
+                                <button type="submit" class="font-courier text-white bg-danger">Lưu Thay Đổi</button>
                             </form>
                             </tbody>
                         </table> <!----></div>
@@ -85,7 +85,7 @@
                                     <input type="password" name="oldPassword" placeholder="Mật khẩu cũ"><br>
                                     <input type="password" name="newPassword" placeholder="Mật khẩu mới"><br>
                                     <input type="password" name="confirmPassword" placeholder="Xác nhận mật khẩu"><br>
-                                    <button type="submit">Thay đổi mật khẩu</button>
+                                    <button type="submit" class="font-courier text-white bg-danger">Thay đổi mật khẩu</button>
                                 </form>
                                 </tbody>
                             </table> <!----></div>
@@ -110,26 +110,6 @@
     </div>
 
 </div>
-<%--<span class="error" id="msg1"></span>--%>
-<%--<form method="post" name="form1" onsubmit="return myValidate()" action="http://localhost:8080/user">--%>
-
-<%--    <input type="hidden" name="action" value="edit">--%>
-<%--    <input type="text" name="email" value="${email}" disabled>--%>
-<%--    <input type="text" name="nickname" value="${nickname}">--%>
-<%--    <input type="text" name="phone" value="${phone}" disabled>--%>
-<%--    <input type="text" name="address" value="${address}">--%>
-<%--    <button type="submit">Lưu Thay Đổi</button>--%>
-<%--</form>--%>
-<%--<span class="error" id="msg2"></span>--%>
-<%--<form method="post" name="form2" onsubmit="return vaidatePassword()" action="http://localhost:8080/user">--%>
-<%--    <input type="hidden" name="action" value="changePassword">--%>
-<%--    <input type="password" name="oldPassword" placeholder="Mật khẩu cũ">--%>
-<%--    <input type="password" name="newPassword" placeholder="Mật khẩu mới">--%>
-<%--    <input type="password" name="confirmPassword" placeholder="Xác nhận mật khẩu">--%>
-<%--    <button type="submit">Thay đổi mật khẩu</button>--%>
-<%--</form>--%>
-
-<%--script validate cho form--%>
 <script>
     function myValidate() {
         let nickname = document.form1.nickname;
