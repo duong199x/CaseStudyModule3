@@ -357,6 +357,10 @@
                                                 </c:forEach>
                                             </select></th>
                                         </tr>
+                                        <tr>
+                                            <th>Hình Ảnh</th>
+                                            <th><input type="text" name="originImage" value="${editProduct.originImage}"></th>
+                                        </tr>
                                         <tr class="submit">
                                             <center>
                                                 <th colspan="2">

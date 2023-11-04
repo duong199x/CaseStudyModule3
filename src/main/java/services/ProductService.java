@@ -16,7 +16,7 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public boolean add(Product product) {
-        String sql = "insert into product(name, price, description, status, categoryId,deleteFlag) values (?,?,?,?,?,0);";
+        String sql = "insert into product(name, price, description, status,categoryId,deleteFlag, originImage) values (?,?,?,?,?,0,?);";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
@@ -24,6 +24,7 @@ public class ProductService implements IProductService<Product> {
             statement.setString(3, product.getDescription());
             statement.setBoolean(4, product.getStatus());
             statement.setInt(5, product.getCategoryId().getId());
+            statement.setString(6, product.getOriginImage());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -34,7 +35,7 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public boolean edit(Product product, int id) {
-        String sql = "update product set name =?, price =?,description =?, status =?,categoryId=? where id =? and product.deleteFlag = 0;";
+        String sql = "update product set name =?, price =?,description =?, status =?,categoryId=?, originImage=? where id =? and product.deleteFlag = 0;";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
@@ -42,7 +43,8 @@ public class ProductService implements IProductService<Product> {
             statement.setString(3, product.getDescription());
             statement.setBoolean(4, product.getStatus());
             statement.setInt(5, product.getCategoryId().getId());
-            statement.setInt(6, id);
+            statement.setString(6,product.getOriginImage());
+            statement.setInt(7, id);
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -80,8 +82,9 @@ public class ProductService implements IProductService<Product> {
                 boolean status = resultSet.getBoolean("status");
                 int categoryId = resultSet.getInt("categoryId");
                 String nameCategory = resultSet.getString("brand");
+                String originImage= resultSet.getString("originImage");
                 Category category = new Category(categoryId, nameCategory);
-                Product product = new Product(id, name, price, description, status, category);
+                Product product = new Product(id, name, price, description, status, originImage, category);
                 productList.add(product);
             }
         } catch (SQLException e) {
@@ -106,8 +109,9 @@ public class ProductService implements IProductService<Product> {
                 boolean status = resultSet.getBoolean("status");
                 int categoryId = resultSet.getInt("categoryId");
                 String nameCategory = resultSet.getString("brand");
+                String originImage= resultSet.getString("originImage");
                 Category category = new Category(categoryId, nameCategory);
-                product = new Product(id, name, price, description, status, category);
+                product = new Product(id, name, price, description, status, originImage, category);
                 return product;
             }
         } catch (SQLException e) {
@@ -130,8 +134,34 @@ public class ProductService implements IProductService<Product> {
                 boolean status = resultSet.getBoolean("status");
                 int categoryId = resultSet.getInt("categoryId");
                 String nameCategory = resultSet.getString("brand");
+                String originImage= resultSet.getString("originImage");
                 Category category = new Category(categoryId, nameCategory);
-                Product product = new Product(id, name, price, description, status, category);
+                Product product = new Product(id, name, price, description, status, originImage, category);
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return productList;
+    }
+    public List<Product> findByCategory(int categoryId) {
+        List<Product> productList = new ArrayList<>();
+        String sql = "select product.*,c.name as brand from product join category c on product.categoryId = c.id and product.deleteFlag = 0 and product.categoryId = ?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,categoryId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                boolean status = resultSet.getBoolean("status");
+                String nameCategory = resultSet.getString("brand");
+                String originImage= resultSet.getString("originImage");
+                Category category = new Category(categoryId, nameCategory);
+                Product product = new Product(id, name, price, description, status, originImage, category);
                 productList.add(product);
             }
         } catch (SQLException e) {
