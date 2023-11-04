@@ -153,3 +153,11 @@ begin
 end;
 //
 DELIMITER ;
+create table cart (
+        id int primary key auto_increment,
+        productId int,
+        userId int,
+        foreign key (productId) references product (id),
+        foreign key (userId) references user (id)
+)
+select product.*,c.name as brand from product join category c on product.categoryId = c.id and product.deleteFlag = 0 and product.name like ?;
