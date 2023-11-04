@@ -83,7 +83,7 @@ public class UserService implements IUserService<User> {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 return getUserInfo(rs);
             }
 
@@ -95,7 +95,15 @@ public class UserService implements IUserService<User> {
 
     @Override
     public void changePassword(int id, String password) {
-
+        String sql= "UPDATE user SET password = ? WHERE id = ?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, password);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static User getUserInfo(ResultSet rs) throws SQLException {
