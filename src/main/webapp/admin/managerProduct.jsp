@@ -122,7 +122,7 @@
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">
             <a class="btn bg-gradient-primary w-100"
-               href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">
+               href="/login?action=logout" type="button">
                 Đăng Xuất</a>
         </div>
     </div>
@@ -270,79 +270,82 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Tên Sản Phẩm
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                       Giá
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Tình Trạng
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Mô Tả
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                       Hãng
-                                    </th>
-                                    <th class="text-secondary opacity-7">Chức Năng</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="item" items="${productList}">
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">${item.id}</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">${item.name}</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">${item.price}</p>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <c:choose>
-                                            <c:when test="${item.status==true}">
+    <table class="table align-items-center mb-0">
+        <thead>
+        <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID
+            </th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Name
+            </th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                Price
+            </th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Status
+            </th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Description
+            </th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Brand
+            </th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                Brand
+            </th>
+            <th class="text-secondary opacity-7">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="item" items="${productList}">
+        <tr>
+            <td>
+                <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">${item.id}</h6>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">${item.name}</h6>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <p class="text-xs font-weight-bold mb-0">${item.price}</p>
+            </td>
+            <td class="align-middle text-center text-sm">
+                <c:choose>
+                    <c:when test="${item.status==true}">
                                                  <span class="badge badge-sm bg-gradient-success">
                                                 <c:out value="Còn hàng"/></span>
-                                            </c:when>
-                                            <c:otherwise> <span class="badge badge-sm bg-gradient-secondary">
+                    </c:when>
+                    <c:otherwise> <span class="badge badge-sm bg-gradient-secondary">
                                                 <c:out value="Hết hàng"/></span>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">${item.description}</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">${item.categoryId.name}</span>
-                                    </td>
-
-                                    <td class="align-middle">
-                                        <a href="http://localhost:8080/admin/product?action=edit&id=${item.id}">
-                                        <button class="btn bg-gradient-success">Sửa</button>
-                                        </a>
-                                        <button class="btn bg-gradient-danger"
-                                                onclick="confirmFunction('/admin/product?action=delete&id=${item.id}')">
-                                           Xóa
-                                        </button>
-                                    </td>
-                                </tr>
-                                </c:forEach>
-                            </table>
+                    </c:otherwise>
+                </c:choose>
+            </td>
+            <td class="align-middle text-center">
+                <span class="text-secondary text-xs font-weight-bold">${item.description}</span>
+            </td>
+            <td class="align-middle text-center">
+                <span class="text-secondary text-xs font-weight-bold">${item.categoryId.name}</span>
+            </td>
+            <td> <img src="${item.originImage}" width="250" alt="img"></td>
+            <td class="align-middle">
+                <a href="http://localhost:8080/admin/product?action=edit&id=${item.id}">
+                    <button class="btn bg-gradient-success">Edit</button>
+                </a>
+                <button class="btn bg-gradient-danger"
+                        onclick="confirmFunction('/admin/product?action=delete&id=${item.id}')">
+                    Delete
+                </button>
+            </td>
+        </tr>
+        </c:forEach>
+    </table>
                         </div>
                     </div>
                 </div>
@@ -498,7 +501,7 @@
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="..js/admin/material-dashboard.min.js?v=3.1.0"></script>
+<script src="../js/admin/material-dashboard.min.js?v=3.1.0"></script>
 <script>
     function confirmFunction(url) {
         let a = confirm(`Do you want delete product ?`);
