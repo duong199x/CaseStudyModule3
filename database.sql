@@ -165,3 +165,23 @@ select product.*,image ,c.name as brand from product
     join category c on product.categoryId = c.id and product.deleteFlag = 0
     join image i on product.id = i.productId;
 alter table product add originImage text;
+
+
+create table cart(
+    id int auto_increment primary key,
+    productId int,
+    userId int,
+    sizeId int,
+    foreign key (productId) references product (id),
+    foreign key (userId) references user (id),
+    foreign key (sizeId) references size (id)
+);
+alter table orderdetail add sizeId int;
+alter table orderdetail add foreign key (sizeId) references size (id);
+alter table orderdetail add id int primary key  auto_increment;
+alter table orderdetail drop column quantityBuy;
+
+SELECT c.id, c.userId, p.*, s.id , c2.name, s.size, s.quantity FROM cart c JOIN product p ON c.productId = p.id JOIN size s ON c.sizeId = s.id JOIN category c2 on c2.id = p.categoryId and userId=?;
+
+SELECT od.id, od.orderId, p.*, s.id , c2.name, s.size, s.quantity FROM orderdetail od JOIN product p ON od.productId = p.id JOIN size s ON od.sizeId = s.id JOIN category c2 on c2.id = p.categoryId and orderId=?;
+

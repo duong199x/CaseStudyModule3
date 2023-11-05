@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
             if (SessionAuth.isAdmin(request)) {
                 response.sendRedirect("/admin/product?action=admin");
             } else {
-                response.sendRedirect("/product/home.jsp");
+                response.sendRedirect("/home");
             }
         } else {
             request.getRequestDispatcher("user/login.jsp").forward(request, response);
@@ -85,7 +85,7 @@ public class LoginController extends HttpServlet {
                 response.sendRedirect("/admin/product?action=admin");
             } else {
                 session.setAttribute("role", "user");
-                response.sendRedirect("/product/home.jsp");
+                response.sendRedirect("/home");
             }
         } else {
             request.setAttribute("error", "Tài khoản hoặc mật khẩu không chính xác!");

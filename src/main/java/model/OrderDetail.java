@@ -1,14 +1,40 @@
 package model;
 
 public class OrderDetail {
+    private int id;
     private int orderId;
-    private int productId;
-    private int quantityBuy;
+    private Product product;
+    private Size size;
 
-    public OrderDetail(int orderId, int productId, int quantityBuy) {
+    public OrderDetail(int id, int orderId, Product product, Size size) {
+        this.id = id;
         this.orderId = orderId;
-        this.productId = productId;
-        this.quantityBuy = quantityBuy;
+        this.product = product;
+        this.size = size;
+    }
+
+    public OrderDetail(int orderId, Product product, Size size) {
+        this.orderId = orderId;
+        this.product = product;
+        this.size = size;
+    }
+    public int getId(){
+        return this.id;
+    }
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
     }
 
     public int getOrderId() {
@@ -19,19 +45,4 @@ public class OrderDetail {
         this.orderId = orderId;
     }
 
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public int getQuantityBuy() {
-        return quantityBuy;
-    }
-
-    public void setQuantityBuy(int quantityBuy) {
-        this.quantityBuy = quantityBuy;
-    }
 }

@@ -30,8 +30,16 @@
             <div class="col-8"></div>
             <div class="col-4">
                 <div class="button-login">
-                    <a href="" class="login-user">Đăng Nhập</a>
-                    <a href="" class="register">Đăng Kí</a>
+                    <c:choose>
+                        <c:when test="${nickname != null}">
+                            <a href="/user">${nickname}</a>
+                            <a href="/login?action=logout">Đăng Xuất</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="http://localhost:8080/login" class="login-user">Đăng Nhập</a>
+                            <a href="http://localhost:8080/login?action=register" class="register">Đăng Kí</a>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
@@ -75,30 +83,40 @@
                                 <th>Hình Ảnh</th>
                                 <th>Số Lượng</th>
                                 <th>Giá</th>
-                                <th>Thành Tiền</th>
+                                <th>Size</th>
                                 <th style="width: 20px;">
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <form>
+                            <c:forEach var="item" items="${carts}" >
                                 <tr>
-                                    <td>Jordan1</td>
-                                    <td></td>
-                                    <img src="">
-                                    <td>1</td>
-                                    <td>500</td>
-                                    <td>500</td>
-                                    <th>
-                                        <button class="btn-danger ">Hủy</button>
-                                    </th>
-                                </tr>
+                                <form action="/user?action=remove&id=${item.id}" method="post">
 
-                            </form>
+                                        <td>${item.product.name}</td>
+                                        <td><img src="${item.product.originImage}" style="width: 150px"></td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${item.size.quantity > 0}">
+                                                    <input name="quantity" disabled value="1">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input name="quantity" disabled value="Hết hàng">
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>${item.product.price}</td>
+                                        <td>${item.size.size}</td>
+                                        <th>
+                                            <button type="submit" class="btn-danger">Xoá</button>
+                                        </th>
+                                </form>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                             <tfoot>
                             <th colspan="4">Tổng Tiền</th>
-                            <th>500</th>
+                            <th>${total}</th>
                             </tfoot>
 
                         </table>

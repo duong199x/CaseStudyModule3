@@ -9,7 +9,7 @@ import java.io.IOException;
 public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/admin./index.jsp").forward(request, response);
     }
 
     @Override
