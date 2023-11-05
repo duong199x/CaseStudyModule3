@@ -64,70 +64,22 @@
                 <div class="col-3">
                     <div class="main-left">
                         <ul>
-                            <li><a href="/products/nike.jsp">Nike</a></li>
-                            <li><a href="/products/adidas.jsp">Adidas</a></li>
-                            <li><a href="/products/vans.jsp">Vans</a></li>
-                            <li><a href="/products/orther.jsp">Orther</a></li>
-
+                            <c:forEach var="category" items="${categories}">
+                            <li><a href="/home?action=category&id=${category.id}">${category.name}</a></li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="main-center">
+                        <c:forEach items="${collections}" var="item">
                         <div class="item">
-                            <a href="/products/items.jsp">
-                                <div class="image-product"><img src="../assets/adidas/adidas-yeezy-boost-350-v2-core-black-red.jpg"></div>
-                                <div class="describe"><p>Mô Tả</p></div>
+                            <a href="/home?action=items&id=${item.id}">
+                                <div class="image-product"><img src="${item.originImage}"></div>
+                                <div class="describe"><p>${item.name} - ${item.price}</p></div>
                             </a>
                         </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src="../assets/nike/air%20force%201.PNG"></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src="../assets/orther/vans%20old%20school.PNG"></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="">
-                                <div class="image-product"><img src=""></div>
-                                <div class="describe"><p>Mô Tả</p></div>
-                            </a>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
                 <div class="col-3">

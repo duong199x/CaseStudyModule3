@@ -6,23 +6,38 @@ public class Product {
     private double price;
     private String description;
     private boolean status;
+    private String originImage;
     private Category categoryId;
 
-    public Product(int id, String name, double price, String description, boolean status, Category categoryId) {
+    public Product(int id, String name, double price, String description, boolean status,String originImage, Category categoryId) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.status = status;
+        this.originImage = originImage;
         this.categoryId = categoryId;
     }
 
-    public Product(String name, double price, String description, boolean status, Category categoryId) {
+    public Product(String name, double price, String description, boolean status, String originImage, Category categoryId) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.status = status;
+        this.originImage = originImage;
         this.categoryId = categoryId;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public String getOriginImage() {
+        return originImage;
+    }
+
+    public void setOriginImage(String originImage) {
+        this.originImage = originImage;
     }
 
     public int getId() {

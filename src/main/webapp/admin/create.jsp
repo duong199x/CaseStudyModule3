@@ -190,6 +190,10 @@
                                             </c:forEach>
                                         </select></th>
                                     </tr>
+                                    <tr>
+                                        <th>Link hình ảnh sản phẩm</th>
+                                        <th><input type="text" name="originImage"></th>
+                                    </tr>
                                     <tr class="submit">
                                         <center>
                                             <th colspan="2">

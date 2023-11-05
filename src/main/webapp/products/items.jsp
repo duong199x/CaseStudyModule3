@@ -66,14 +66,15 @@
                     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-touch="false" data-interval="false">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="../assets/nike/air%20force%201.PNG" class="d-block w-100" alt="...">
+                                <img src="${product.originImage}" class="d-block w-100" alt="...">
                             </div>
-                            <div class="carousel-item">
-                                <img src="../assets/adidas/adidas-yeezy-boost-350-v2-core-black-red.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="../assets/nike/air%20force%201.PNG" class="d-block w-100" alt="...">
-                            </div>
+                            <c:forEach var="item" items="${images}">
+                                <c:if test="${item.image != ''}">
+                                    <div class="carousel-item">
+                                        <img src="${item.image}" class="d-block w-100" alt="...">
+                                    </div>
+                                </c:if>
+                            </c:forEach>
                         </div>
                         <button class="carousel-control-prev" type="button" data-target="#carouselExampleControlsNoTouching" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -88,27 +89,23 @@
                 <div class="col-3 information">
                     <div class="describe">
                         <div class="describe-name">
-                            <h6>Tên sản Phẩm</h6>
-                            <p>Mô tả</p>
+                            <h6>${product.name}</h6>
+                            <p>${product.description}</p>
                         </div>
                         <div class="describe-price">
-                            <p>Giá</p>
+                            <p>${product.price}</p>
                         </div>
                         <div class="describe-attention">
                             <p>Quý khách vui lòng kiểm tra kĩ size giày sao cho phù hợp. Nếu không biết hãy liên hệ bên chăm sóc khác hàng.</p>
                         </div>
                         <div class="add-card">
                             <select name="Size">
-                                <option>-size-</option>
-                                <option>36</option>
-                                <option>37</option>
-                                <option>38</option>
-                                <option>39</option>
-                                <option>40</option>
-                                <option>41</option>
-                                <option>42</option>
-                                <option>43</option>
-                                <option>44</option>
+                                <option>-Cỡ Giày-</option>
+                                <c:forEach var="size" items="${sizes}">
+                                    <c:if test="${size.quantity > 0}">
+                                        <option>Cỡ ${size.size} - số lượng: ${size.quantity}</option>
+                                    </c:if>
+                                </c:forEach>
                             </select>
                             <button type="submit">Thêm giỏ hàng</button>
                         </div>

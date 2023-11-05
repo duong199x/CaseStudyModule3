@@ -74,10 +74,17 @@ public class ProductController extends HttpServlet {
     }
 
     private void showProductManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> productList = productIService.findAll();
+        List<Product> productList = null;
+        String search = request.getParameter("search");
+        if (search != null) {
+            productList = productIService.findProductByName(search);
+        } else {
+            productList = productIService.findAll();
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/managerProduct.jsp");
         request.setAttribute("productList", productList);
         dispatcher.forward(request, response);
+
     }
 
     @Override
@@ -94,7 +101,7 @@ public class ProductController extends HttpServlet {
                 editSize(request, response);
                 break;
             case "editimage":
-                editImage(request,response);
+                editImage(request, response);
                 break;
         }
     }
@@ -103,7 +110,7 @@ public class ProductController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String image = request.getParameter("image");
         int productId = Integer.parseInt(request.getParameter("productId"));
-        Image image1 = new Image(id,image,productId);
+        Image image1 = new Image(id, image, productId);
         imageIImageService.edit(image1, productId, id);
         response.sendRedirect("/admin/product?action=edit&id=" + productId);
     }
@@ -123,8 +130,9 @@ public class ProductController extends HttpServlet {
         String description = request.getParameter("description");
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        String originImage = request.getParameter("originImage");
         Category category = new Category(categoryId);
-        Product product = new Product(name, price, description, status, category);
+        Product product = new Product(name, price, description, status, originImage, category);
         productIService.add(product);
         response.sendRedirect("/admin/product?action=admin");
     }
@@ -137,9 +145,10 @@ public class ProductController extends HttpServlet {
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
         System.out.println(request.getParameter("status"));
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        String originImage = request.getParameter("originImage");
         Category category = categoryService.findProductById(categoryId);
         category.getName();
-        Product product = new Product(name, price, description, status, category);
+        Product product = new Product(name, price, description, status, originImage, category);
         productIService.edit(product, id);
         response.sendRedirect("/admin/product?action=admin");
     }

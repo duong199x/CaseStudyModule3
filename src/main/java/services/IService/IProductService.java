@@ -1,5 +1,7 @@
 package services.IService;
 
+import model.Product;
+
 import java.util.List;
 
 public interface IProductService<E> {
@@ -11,4 +13,6 @@ public interface IProductService<E> {
 
     List<E> findAll();
     E findProductById(int id);
+     List<E> findProductByName(String nameFind);
+    List<E> findByCategory(int categoryId);
 }
