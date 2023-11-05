@@ -28,8 +28,8 @@
         <div class="col-8"></div>
         <div class="col-4">
             <div class="button-login">
-                <a href="http://localhost:8080/login" class="login-user">Đăng Nhập</a>
-                <a href="http://localhost:8080/login?action=register" class="register">Đăng Kí</a>
+                <a href="" class="login-user">Đăng Nhập</a>
+                <a href="" class="register">Đăng Kí</a>
             </div>
         </div>
     </div>
