@@ -95,8 +95,8 @@
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                                                checked>
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms
-                                            and Conditions</a>
+                                            Tôi đồng ý <a href="javascript:;" class="text-dark font-weight-bolder">
+                                           các điều khoản</a>
                                         </label>
                                     </div>
                                     <div class="text-center">
