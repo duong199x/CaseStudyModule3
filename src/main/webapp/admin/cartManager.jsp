@@ -14,7 +14,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <title>
-        Thêm Sản Phẩm - WS
+        Quản Lý Đơn Hàng - WS
     </title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -113,7 +113,7 @@
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">
             <a class="btn bg-gradient-primary w-100"
-               href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">
+               href="/login?action=logout" type="button">
                 Đăng Xuất</a>
         </div>
     </div>
@@ -158,8 +158,8 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Tổng Tiền
                                     </th>
-                                    <th>e</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                                    <th class="text-uppercase max-width-200 text-secondary text-xxs font-weight-bolder opacity-7">
                                         Trạng Thái
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -175,14 +175,22 @@
                                     <td>${item.total}</td>
                                     <td>${item.user.email}</td>
                                     <td>
-                                        <select class="max-width-200 bg-primary text-white">
-                                            <option class="badge badge-sm bg-gradient-secondary" value="true">Chưa Xác Nhận</option>
-                                            <option class="badge badge-sm bg-gradient-success" value="false">Đã Xác Nhận</option>
-                                            <option class="badge badge-sm bg-gradient-secondary" value="false">Chưa Giao Hàng</option>
-                                            <option class="badge badge-sm bg-gradient-success" value="false">Đã Giao Hàng</option>
-                                        </select>
+                                        <c:choose>
+                                            <c:when test="${item.status == 1}">
+                                                <span class="badge badge-sm bg-gradient-secondary">Chưa Xác Nhận</span>
+                                            </c:when>
+                                            <c:when test="${item.status == 2}">
+                                                <span class="badge badge-sm bg-gradient-success">Đã Xác Nhận</span>
+                                            </c:when>
+                                            <c:when test="${item.status == 3}">
+                                                <span class="badge badge-sm bg-gradient-secondary">Chưa Giao Hàng</span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="badge badge-sm bg-gradient-success" >Đã Giao Hàng</span>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </td>
-                                    <td><a href="" class="text-success">Chi tiết</a></td>
+                                    <td><a href="/admin?action=details&id=${item.id}" class="text-success">Chi tiết</a></td>
                                 </tr>
                                 </c:forEach>
                                 </tbody>
@@ -342,7 +350,7 @@
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="..js/admin/material-dashboard.min.js?v=3.1.0"></script>
+<script src="../js/admin/material-dashboard.min.js?v=3.1.0"></script>
 </body>
 
 </html>

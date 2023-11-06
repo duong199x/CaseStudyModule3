@@ -73,46 +73,42 @@
             <div class="product-acd-content product-content-size">
                 <div class="product-size-wrapper">
                     <div class="product-size-tab">
-                        <h3 href="#" class="tab-list active">Giỏ Hàng </h3>
+                        <h3 href="#" class="tab-list active">Đơn Hàng </h3>
                     </div>
                     <div class="product-size-table-box">
                         <table class="product-size-table-bd-1-white">
                             <thead>
                             <tr>
-                                <th>Tên Sản Phẩm</th>
-                                <th>Hình Ảnh</th>
-                                <th>Số Lượng</th>
-                                <th>Giá</th>
-                                <th>Size</th>
-                                <th style="width: 20px;">
+                                <th>
+                                    Thời Gian
+                                </th>
+                                <th>
+                                    Tổng Tiền
+                                </th>
+                                <th>
+                                    Số Diện Thoại
+                                </th>
+                                <th>
+                                    Địa Chỉ
+                                </th>
+                                <th>
+                                    Trạng Thái
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="item" items="${carts}" >
-                                <tr>
-                                <form action="/user?action=remove&id=${item.id}" method="post">
-
-                                        <td>${item.product.name}</td>
-                                        <td><img src="${item.product.originImage}" style="width: 150px"></td>
-                                        <td>
-                                            <c:choose>
-                                                <c:when test="${item.size.quantity > 0}">
-                                                    <input name="quantity" disabled value="1">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <input name="quantity" disabled value="Hết hàng">
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </td>
-                                        <td>${item.product.price}</td>
-                                        <td>${item.size.size}</td>
-                                        <th>
-                                            <button type="submit" class="btn-danger">Xoá</button>
-                                        </th>
-                                </form>
-                                </tr>
-                            </c:forEach>
+                            <tr>
+                                <td>${order.time}</td>
+                                <td>${order.total}</td>
+                                <td>${order.user.phone}</td>
+                                <td>${order.user.address}</td>
+                                <td>
+                                    <c:if test="${order.status == 1}"> <span>Chưa Xác Nhận</span></c:if>
+                                    <c:if test="${order.status == 2}"> <span>Đã Xác Nhận</span></c:if>
+                                    <c:if test="${order.status == 3}"> <span>Chưa Giao Hàng</span></c:if>
+                                    <c:if test="${order.status == 4}"> <span>Đã Giao Hàng</span></c:if>
+                                </td>
+                            </tr>
                             </tbody>
                             <tfoot>
                             <th colspan="4">Tổng Tiền</th>
@@ -120,17 +116,38 @@
                             </tfoot>
 
                         </table>
-                        <div class="row mt-5">
-                            <div class="col-6"></div>
-                            <div class="col-3">
-                                <a href="/user?action=order"><button type="submit" class="btn-danger">Đặt Hàng</button></a>
-                            </div>
-                            <div class="col-3"></div>
-                        </div>
-                        <!----></div>
+                    </div>
+                </div>
+                <div class="product-size-wrapper">
+                    <div class="product-size-tab">
+                        <h3 href="#" class="tab-list active">Chi Tiết Đơn Hàng </h3>
+                    </div>
+                    <div class="product-size-table-box">
+                        <table class="product-size-table-bd-1-white">
+                            <thead>
+                            <tr>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Hình Ảnh</th>
+                                <th>Giá</th>
+                                <th>Size</th>
+                                <th style="width: 20px;">
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="item" items="${orderDetails}" >
+                                <tr>
+                                        <td>${item.product.name}</td>
+                                        <td><img src="${item.product.originImage}" style="width: 150px"></td>
+                                        <td>${item.product.price}</td>
+                                        <td>${item.size.size}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
         </div>
     </center>
     <div class="footer">

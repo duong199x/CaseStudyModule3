@@ -40,10 +40,10 @@ public class OrderDetailsService implements IOrderDetailService<OrderDetail> {
     @Override
     public List<OrderDetail> findByOderId(int orderId) {
         List<OrderDetail> list = new ArrayList<>();
-        String sql = "SELECT od.id, od.orderId, p.*, s.id , c2.name, s.size, s.quantity FROM orderdetails od\n" +
-                "    JOIN product p ON c.productId = p.id\n" +
-                "    JOIN size s ON c.sizeId = s.id\n" +
-                "    JOIN category c2 on c2.id = p.categoryId where userId=?;";
+        String sql = "SELECT od.id, od.orderId, p.*, s.id , c2.name, s.size, s.quantity FROM orderdetail od\n" +
+                "    JOIN product p ON od.productId = p.id\n" +
+                "    JOIN size s ON od.sizeId = s.id\n" +
+                "    JOIN category c2 on c2.id = p.categoryId where orderId = ?;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, orderId);
