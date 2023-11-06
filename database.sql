@@ -187,3 +187,8 @@ SELECT od.id, od.orderId, p.*, s.id , c2.name, s.size, s.quantity FROM orderdeta
 
 SELECT o.*, u.email, u.nickname,u.phone, u.address FROM `order` o join user u on u.id = o.userId;
 
+SELECT od.id, od.orderId, p.*, s.id , c2.name, s.size, s.quantity FROM orderdetail od
+    JOIN product p ON od.productId = p.id
+    JOIN size s ON od.sizeId = s.id
+    JOIN category c2 on c2.id = p.categoryId where orderId = ?;
+

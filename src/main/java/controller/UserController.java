@@ -41,7 +41,10 @@ public class UserController extends HttpServlet {
         } else {
             switch (action) {
                 case "details":
-                    getDetails(getUser(request), request, response);
+                    showDetails(request,response);
+                    break;
+                case "edit":
+                    showFormEdit(getUser(request), request, response);
                     break;
                 case "cart":
                     showCart(request, response);
@@ -49,13 +52,40 @@ public class UserController extends HttpServlet {
                 case "add":
                     addToCart(request, response);
                     break;
-                    case "order":
-                        doOrder(request, response);
-                        break;
+                case "orderDetails":
+                    showOrderDetails(request, response);
+                    break;
+                case "order":
+                    doOrder(request, response);
+                    break;
                 default:
                     response.sendRedirect("/notfound");
             }
         }
+    }
+
+    private void showOrderDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int orderId = Integer.parseInt(request.getParameter("id"));
+        Order order = orderService.findById(orderId);
+        if (order == null) {
+            response.sendRedirect("/notfound");
+        }else {
+            List<OrderDetail> list = orderDetailService.findByOderId(orderId);
+            request.setAttribute("order", order);
+            request.setAttribute("orderDetails", list);
+            request.getRequestDispatcher("/user/orderdetails.jsp").forward(request,response);
+        }
+    }
+
+    private void showDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = getUser(request);
+        List<Order> list = orderService.findByUser(user.getId());
+        request.setAttribute("email", user.getEmail());
+        request.setAttribute("nickname", user.getNickname());
+        request.setAttribute("phone", user.getPhone());
+        request.setAttribute("address", user.getAddress());
+        request.setAttribute("listOrder",list);
+        request.getRequestDispatcher("/user/information.jsp").forward(request, response);
     }
 
     private void doOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -96,12 +126,12 @@ public class UserController extends HttpServlet {
         request.getRequestDispatcher("/user/cart.jsp").forward(request, response);
     }
 
-    private void getDetails(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void showFormEdit(User user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("email", user.getEmail());
         request.setAttribute("nickname", user.getNickname());
         request.setAttribute("phone", user.getPhone());
         request.setAttribute("address", user.getAddress());
-        request.getRequestDispatcher("/user/details.jsp").forward(request, response);
+        request.getRequestDispatcher("/user/edit.jsp").forward(request, response);
     }
 
     @Override
@@ -141,10 +171,10 @@ public class UserController extends HttpServlet {
         if (user.getPassword().equals(oldPassword)) {
             userService.changePassword(user.getId(), newPassword);
             request.setAttribute("message", "Đổi mật khẩu thành công");
-            getDetails(user, request, response);
+            showFormEdit(user, request, response);
         } else {
             request.setAttribute("error", "Sai mật khẩu");
-            getDetails(user, request, response);
+            showFormEdit(user, request, response);
         }
     }
 

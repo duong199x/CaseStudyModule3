@@ -10,14 +10,14 @@ import java.util.List;
 
 public class OrderService implements IOrderService<Order> {
     private Connection connection = ConnectMySql.getConnection();
+
     @Override
     public int add(Order order) {
-        String generatedColumns[] = { "id" };
+        String generatedColumns[] = {"id"};
         String sql = "INSERT INTO `order` (time,total,userId,status) VALUES (?,?,?,?);";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql,generatedColumns);
-                    connection.prepareStatement(sql);
-//            ps.setDate(1, Date.valueOf("2023-05-03"));
+            PreparedStatement ps = connection.prepareStatement(sql, generatedColumns);
+            connection.prepareStatement(sql);
             ps.setDate(1, order.getTime());
             ps.setDouble(2, order.getTotal());
             ps.setInt(3, order.getUser().getId());
@@ -25,8 +25,8 @@ public class OrderService implements IOrderService<Order> {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             int id;
-            if(rs.next()) {
-                id=rs.getInt(1);
+            if (rs.next()) {
+                id = rs.getInt(1);
                 return id;
             }
         } catch (SQLException e) {
@@ -42,7 +42,15 @@ public class OrderService implements IOrderService<Order> {
 
     @Override
     public void changeStatus(int id, int status) {
-
+        String sql = "UPDATE `order` SET `status`= ? where id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, status);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -55,20 +63,10 @@ public class OrderService implements IOrderService<Order> {
         List<Order> orderList = new ArrayList<Order>();
         String sql = "SELECT o.*, u.email, u.nickname,u.phone, u.address FROM `order` o join user u on u.id = o.userId;";
         try {
-            PreparedStatement ps= connection.prepareStatement(sql);
+            PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                int id= rs.getInt("id");
-                Date date = rs.getDate("time");
-                double total = rs.getDouble("total");
-                int userId = rs.getInt("userId");
-                int status = rs.getInt("status");
-                String email = rs.getString("email");
-                String nickname = rs.getString("nickname");
-                String phone = rs.getString("phone");
-                String address = rs.getString("address");
-                User user = new User(userId,email,"",nickname,phone,address,2);
-                Order order = new Order(id,date,total,user,status);
+                Order order = getOrder(rs);
                 orderList.add(order);
             }
         } catch (SQLException e) {
@@ -78,13 +76,48 @@ public class OrderService implements IOrderService<Order> {
     }
 
     @Override
-    public List<Order> findByUser(int id) {
-        return null;
+    public List<Order> findByUser(int userId) {
+        List<Order> orderList = new ArrayList<>();
+        String sql = "SELECT o.*, u.email, u.nickname,u.phone, u.address FROM `order` o join user u on u.id = o.userId and o.userId = ?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1,userId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                orderList.add(getOrder(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return orderList;
     }
 
     @Override
     public Order findById(int id) {
-//        String sql=
+        String sql = "SELECT o.*, u.email, u.nickname,u.phone, u.address FROM `order` o join user u on u.id = o.userId and o.id = ?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+               return getOrder(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return null;
+    }
+    private static Order getOrder(ResultSet rs) throws SQLException {
+        int id = rs.getInt("id");
+        Date date = rs.getDate("time");
+        double total = rs.getDouble("total");
+        int userId = rs.getInt("userId");
+        int status = rs.getInt("status");
+        String email = rs.getString("email");
+        String nickname = rs.getString("nickname");
+        String phone = rs.getString("phone");
+        String address = rs.getString("address");
+        User user = new User(userId, email, nickname, phone, address);
+        return new Order(id, date, total, user, status);
     }
 }

@@ -64,31 +64,28 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <form>
                                 <tr>
                                     <th>Email</th>
-                                    <td>toandoan98@gmail.com</td>
+                                    <td>${email}</td>
                                 </tr>
                                 <tr>
                                     <th>Tên Tài Khoản</th>
-                                    <td>Toan Dep Trai</td>
+                                    <td>${nickname}</td>
                                 </tr>
                                 <tr>
                                     <th>Số Điện Thoại</th>
-                                    <td>098********</td>
+                                    <td>${phone}</td>
                                 </tr>
                                 <tr>
                                     <th>Địa chỉ</th>
-                                    <td>Long Bien - Ha Noi</td>
+                                    <td>${address}</td>
                                 </tr>
                                 <tr>
                                     <th></th>
                                     <th>
-                                        <a href="../user/details.jsp"><button class="text-white bg-danger">Thay Đổi</button></a>
+                                        <a href="/user?action=edit"><button class="text-white bg-danger">Thay Đổi</button></a>
                                     </th>
                                 </tr>
-                            </form>
-
                         </table>
                         </center>
                         <div>
@@ -104,10 +101,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <td>1</td>
-                            <td>1-1-2023 10:25:30</td>
-                            <td>100000</td>
-                            <td><a href="" class="text-danger">chi tiết</a></td>
+                            <c:forEach var="item" items="${listOrder}">
+                                <tr>
+                                    <td>${item.id}</td>
+                                    <td>${item.time}</td>
+                                    <td>${item.total}</td>
+                                    <td><a href="/user?action=orderDetails&id=${item.id}" class="text-danger">chi tiết</a></td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                         </tbody>
