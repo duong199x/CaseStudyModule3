@@ -1,9 +1,11 @@
 package services;
 
 import model.Order;
+import model.User;
 import services.IService.IOrderService;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderService implements IOrderService<Order> {
@@ -50,11 +52,39 @@ public class OrderService implements IOrderService<Order> {
 
     @Override
     public List<Order> getAll() {
-        return null;
+        List<Order> orderList = new ArrayList<Order>();
+        String sql = "SELECT o.*, u.email, u.nickname,u.phone, u.address FROM `order` o join user u on u.id = o.userId;";
+        try {
+            PreparedStatement ps= connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id= rs.getInt("id");
+                Date date = rs.getDate("time");
+                double total = rs.getDouble("total");
+                int userId = rs.getInt("userId");
+                int status = rs.getInt("status");
+                String email = rs.getString("email");
+                String nickname = rs.getString("nickname");
+                String phone = rs.getString("phone");
+                String address = rs.getString("address");
+                User user = new User(userId,email,"",nickname,phone,address,2);
+                Order order = new Order(id,date,total,user,status);
+                orderList.add(order);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return orderList;
     }
 
     @Override
     public List<Order> findByUser(int id) {
+        return null;
+    }
+
+    @Override
+    public Order findById(int id) {
+//        String sql=
         return null;
     }
 }
