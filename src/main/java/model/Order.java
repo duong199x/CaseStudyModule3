@@ -1,26 +1,27 @@
 package model;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class Order {
     private int id;
-    private LocalDateTime time;
+    private Date time;
     private double total;
-    private int userId;
+    private User user;
     private int status;
 
-    public Order(int id, LocalDateTime time, double total, int userId,int status) {
+    public Order(int id, Date time, double total, User user,int status) {
         this.id = id;
         this.time = time;
         this.total = total;
-        this.userId = userId;
+        this.user=user;
         this.status=status;
     }
 
-    public Order(LocalDateTime time, double total, int userId) {
+    public Order(Date time, double total,  User user) {
         this.time = time;
         this.total = total;
-        this.userId = userId;
+        this.user=user;
         this.status = 1;
     }
 
@@ -40,11 +41,11 @@ public class Order {
         this.id = id;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public Date getTime() {
+        return this.time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
@@ -56,11 +57,11 @@ public class Order {
         this.total = total;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser( User user) {
+        this.user = user;
     }
 }

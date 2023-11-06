@@ -158,6 +158,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Tổng Tiền
                                     </th>
+                                    <th>e</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Trạng Thái
                                     </th>
@@ -167,10 +168,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach items="${orders}" var="item">
                                 <tr>
-                                    <td>1</td>
-                                    <td>2023/11/1 11:11:11</td>
-                                    <td>100000.0</td>
+                                    <td>${item.id}</td>
+                                    <td>${item.time}</td>
+                                    <td>${item.total}</td>
+                                    <td>${item.user.email}</td>
                                     <td>
                                         <select class="max-width-200 bg-primary text-white">
                                             <option class="badge badge-sm bg-gradient-secondary" value="true">Chưa Xác Nhận</option>
@@ -181,6 +184,7 @@
                                     </td>
                                     <td><a href="" class="text-success">Chi tiết</a></td>
                                 </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

@@ -97,18 +97,21 @@
                         </div>
                         <div class="describe-attention">
                             <p>Quý khách vui lòng kiểm tra kĩ size giày sao cho phù hợp. Nếu không biết hãy liên hệ bên chăm sóc khác hàng.</p>
+                            <p id="msg"></p>
                         </div>
-                        <div class="add-card">
-                            <select name="Size">
-                                <option>-Cỡ Giày-</option>
+                        <form class="add-card" name="form1" method="get" action="/user" onsubmit="return checkSelect()">
+                            <input type="hidden" name="action" value="add">
+                            <input type="hidden" name="productId" value="${product.id}">
+                            <select name="sizeId">
+                                <option selected value="">-Cỡ Giày-</option>
                                 <c:forEach var="size" items="${sizes}">
                                     <c:if test="${size.quantity > 0}">
-                                        <option>Cỡ ${size.size} - số lượng: ${size.quantity}</option>
+                                        <option value="${size.id}">Cỡ ${size.size} - số lượng: ${size.quantity}</option>
                                     </c:if>
                                 </c:forEach>
                             </select>
                             <button type="submit">Thêm giỏ hàng</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col-3 nodata"></div>
@@ -120,9 +123,9 @@
             <div class="col-3 nodata"></div>
             <div class="col-3">
                 <div>
-                    <a href="/products/home.jsp">home</a>
+                    <a href="/home">home</a>
                     <p> >  </p>
-                    <a href="/products/collections.jsp">shop</a>
+                    <a href="/home?action=collections">shop</a>
                 </div>
             </div>
             <div class="col-3">
@@ -137,5 +140,17 @@
     </div>
 
 </div>
+<script>
+    function checkSelect() {
+        size = document.form1.sizeId;
+        msg = document.getElementById("msg");
+        if (size.value === "") {
+            msg.innerHTML = "Vui lòng chọn cỡ giày"
+            return false;
+        } else {
+            msg.innerHTML = "";
+        }
+    }
+</script>
 </body>
 </html>
