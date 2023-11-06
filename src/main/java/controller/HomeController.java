@@ -1,5 +1,6 @@
 package controller;
 
+import filter.SessionAuth;
 import model.Category;
 import model.Image;
 import model.Product;
@@ -42,16 +43,21 @@ public class HomeController extends HttpServlet {
                 showItem(request, response);
                 break;
             case "category":
-                int id= Integer.parseInt(request.getParameter("id"));
-                String category=categoryService.findProductById(id).getName();
-                List<Product> products = productIService.findByCategory(id);
-                request.setAttribute("category", category);
-                request.setAttribute("listproduct", products);
-                request.getRequestDispatcher("/products/nike.jsp").forward(request, response);
+                showByCategory(request, response);
                 break;
             default:
                 response.sendRedirect("/notfound");
         }
+    }
+
+    private void showByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id= Integer.parseInt(request.getParameter("id"));
+        String category=categoryService.findProductById(id).getName();
+        List<Product> products = productIService.findByCategory(id);
+        request.setAttribute("category", category);
+        request.setAttribute("listproduct", products);
+        request.setAttribute("nickname", SessionAuth.getNickname(request));
+        request.getRequestDispatcher("/products/nike.jsp").forward(request, response);
     }
 
     private void showItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,6 +68,7 @@ public class HomeController extends HttpServlet {
         request.setAttribute("product", product);
         request.setAttribute("images", listImage);
         request.setAttribute("sizes", listSize);
+        request.setAttribute("nickname", SessionAuth.getNickname(request));
         request.getRequestDispatcher("/products/items.jsp").forward(request, response);
     }
 
@@ -70,11 +77,13 @@ public class HomeController extends HttpServlet {
         List<Category> categories= categoryService.findAll();
         request.setAttribute("collections", list);
         request.setAttribute("categories", categories);
+        request.setAttribute("nickname", SessionAuth.getNickname(request));
         request.getRequestDispatcher("/products/collections.jsp").forward(request, response);
     }
 
     private void showHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/products/home.jsp");
+        request.setAttribute("nickname", SessionAuth.getNickname(request));
         dispatcher.forward(request, response);
     }
 

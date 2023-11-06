@@ -22,4 +22,11 @@ public class SessionAuth {
         }
         return false;
     }
+    public static String getNickname(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            return (String) session.getAttribute("nickname");
+        }
+        return null;
+    }
 }
