@@ -65,7 +65,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/billing.html">
+                <a class="nav-link text-white " href="http://localhost:8080/admin?action=orders">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">receipt_long</i>
                     </div>
@@ -113,7 +113,7 @@
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">
             <a class="btn bg-gradient-primary w-100"
-               href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">
+               href="/login?action=logout" type="button">
                 Đăng Xuất</a>
         </div>
     </div>

@@ -28,8 +28,17 @@
         <div class="col-8"></div>
         <div class="col-4">
             <div class="button-login">
-                <a href="" class="login-user">Đăng Nhập</a>
-                <a href="" class="register">Đăng Kí</a>
+                <c:choose>
+                    <c:when test="${nickname != null}">
+                        <a href="/user"><button class="btn btn-success">${nickname}</button></a>
+                        <a href="/user?action=cart"><button class="btn btn-danger">Cart</button></a>
+                        <a href="/login?action=logout"><button class="btn btn-primary">Đăng Xuất</button></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="http://localhost:8080/login" class="login-user">Đăng Nhập</a>
+                        <a href="http://localhost:8080/login?action=register" class="register">Đăng Kí</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>
@@ -55,45 +64,73 @@
                             var timeString = day + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + seconds;
                             document.getElementById("clock").innerHTML = timeString;
                         }
+
                         setInterval(updateClock, 1000);
                     </script>
                 </div>
             </div>
         </div>
         <div class="body">
-            <div id="carouselExampleDark" class="list-nike">
-                <div class="carousel slide" data-ride="carousel">
+<%--            <div id="carouselExampleDark" class="list-nike">--%>
+<%--                <div class="carousel slide" data-ride="carousel">--%>
 
-                    <div class="carousel-inner" style="margin-top: 32px">
-                        <div class="carousel-item active">
-                            <img class="d-block" src="../assets/adidas/adidas-yeezy-boost-350-v2-core-black-red.jpg" alt="First slide">
-                            <h4>Adidas</h4>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block" src="../assets/air%20force%201.PNG" alt="Second slide">
-                            <h4>Nike</h4>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block" src="../assets/vans%20old%20school.PNG" alt="Third slide">
-                            <h4>Vans</h4>
-                        </div>
+<%--                    <div class="carousel-inner" style="margin-top: 32px">--%>
+<%--                        <div class="carousel-item active">--%>
+<%--                            <img class="d-block" src="../assets/adidas/adidas-yeezy-boost-350-v2-core-black-red.jpg"--%>
+<%--                                 alt="First slide">--%>
+<%--                            <h4>Adidas</h4>--%>
+<%--                        </div>--%>
+<%--                        <div class="carousel-item">--%>
+<%--                            <img class="d-block" src="../assets/nike/air force 1.PNG" alt="Second slide">--%>
+<%--                            <h4>Nike</h4>--%>
+<%--                        </div>--%>
+<%--                        <div class="carousel-item">--%>
+<%--                            <img class="d-block" src="../assets/orther/vans old school.PNG" alt="Third slide">--%>
+<%--                            <h4>Vans</h4>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <ol class="carousel-indicators" style="position: static!important;">--%>
+<%--                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>--%>
+<%--                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>--%>
+<%--                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>--%>
+<%--                    </ol>--%>
+<%--                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"--%>
+<%--                       data-slide="prev">--%>
+<%--                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>--%>
+<%--                        <span class="sr-only">Previous</span>--%>
+<%--                    </a>--%>
+<%--                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"--%>
+<%--                       data-slide="next">--%>
+<%--                        <span class="carousel-control-next-icon" aria-hidden="true"></span>--%>
+<%--                        <span class="sr-only">Next</span>--%>
+<%--                    </a>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../assets/adidas/adidas-yeezy-boost-350-v2-core-black-red.jpg" class="d-block w-100" alt="...">
                     </div>
-                    <ol class="carousel-indicators" style="position: static!important;">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                       data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                       data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                    <div class="carousel-item">
+                        <img src="../assets/nike/air force 1.PNG" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../assets/orther/vans old school.PNG" class="d-block w-100" alt="...">
+                    </div>
                 </div>
+                <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </button>
             </div>
         </div>
 

@@ -32,8 +32,8 @@
                 <div class="button-login">
                     <c:choose>
                         <c:when test="${nickname != null}">
-                            <a href="/user">${nickname}</a>
-                            <a href="/login?action=logout">Đăng Xuất</a>
+                            <a href="/user"><button class="btn btn-success">${nickname}</button></a>
+                            <a href="/login?action=logout"><button class="btn btn-primary">Đăng Xuất</button></a>
                         </c:when>
                         <c:otherwise>
                             <a href="http://localhost:8080/login" class="login-user">Đăng Nhập</a>
@@ -123,7 +123,7 @@
                         <div class="row mt-5">
                             <div class="col-6"></div>
                             <div class="col-3">
-                                <a>
+                                <a href="http://localhost:8080/home?action=collections">
                                     <button class="btn-white">Quay Lại</button>
                                 </a>
                                 <button type="submit" class="btn-danger">Xác Nhận</button>
