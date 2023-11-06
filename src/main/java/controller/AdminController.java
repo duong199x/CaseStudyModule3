@@ -28,8 +28,8 @@ public class AdminController extends HttpServlet {
     }
 
     private void showOrderDetails(HttpServletRequest request, HttpServletResponse response) {
-        int orderId = Integer.parseInt(request.getParameter("orderId"));
-        Order order = orderService.fi;
+//        int orderId = Integer.parseInt(request.getParameter("orderId"));
+//        Order order = orderService.fi;
     }
 
     private void showOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

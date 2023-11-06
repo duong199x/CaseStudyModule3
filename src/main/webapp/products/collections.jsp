@@ -28,10 +28,17 @@
         <div class="row">
             <div class="col-8"></div>
             <div class="col-4">
-                <div class="button-login">
-                    <a href="" class="login-user">Đăng Nhập</a>
-                    <a href="" class="register">Đăng Kí</a>
-                </div>
+                <c:choose>
+                    <c:when test="${nickname != null}">
+                        <a href="/user"><button class="btn btn-success">${nickname}</button></a>
+                        <a href="/user?action=cart"><button class="btn btn-danger">Cart</button></a>
+                        <a href="/login?action=logout"><button class="btn btn-primary">Đăng Xuất</button></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="http://localhost:8080/login" class="login-user">Đăng Nhập</a>
+                        <a href="http://localhost:8080/login?action=register" class="register">Đăng Kí</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>
