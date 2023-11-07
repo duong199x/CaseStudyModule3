@@ -62,11 +62,7 @@ create table orderDetail
 # user
 insert into user(email, password, nickname, phone, address, role)
 values ('admin@gmail.com', '123456', 'admin', '', '', 1);
-insert into user(email, password, nickname, phone, address, role)
-values ('duong@gmail.com', '123456789', 'duong', '0321575891', 'hanoi', 2);
 # order
-insert into `order`(time, total, userId)
-values ('2008-11-11 13:23:44', 200000.0, 2);
 # category
 insert into category(name)
 values ('nike');
@@ -75,44 +71,15 @@ values ('adidas');
 insert into category(name)
 values ('vans');
 # product
-insert into product(name, price, description, status, categoryId)
-values ('Yeezy 350', 200000, 'đỏ đen', true, 2);
-insert into product(name, price, description, status, categoryId)
-values ('air force 1', 300000, 'trắng đỏ', true, 1);
-insert into product(name, price, description, status, categoryId)
-values ('vans old school', 100000, 'trắng đen', true, 3);
 # size
-insert into size(size, quantity, productId)
-values (40, 10, 2);
-insert into size(size, quantity, productId)
-values (42, 20, 2);
-insert into size(size, quantity, productId)
-values (43, 30, 1);
-insert into size(size, quantity, productId)
-values (39, 0, 3);
 # image
-insert into image(image, productId)
-values ('abc.jpg', 1);
-insert into image(image, productId)
-values ('abc.jpg', 2);
-insert into image(image, productId)
-values ('abc.jpg', 3);
 # orderdetail
-insert into orderdetail(orderId, productId, quantityBuy, status)
-values (1, 1, 2, 1);
 # data query
 alter table orderdetail drop column status;
 alter table `order` add column (status int);
 update `order` set status = 1 where id = 1;
-select product.*,c.name as brand from product join category c on product.categoryId = c.íd;
-insert into product(name, price, description, status, categoryId)
-values ('nike jordan', 50000, 'đen trắng', false, 1);
-insert into product(name, price, description, status, categoryId) values (?,?,?,?,?);
-select * from category;
 ALTER TABLE category
     RENAME COLUMN íd to id;
-select product.*,c.name as brand from product join category c on product.categoryId = c.id where product.id=1;
-insert into size(size, quantity, productId) values (?,?,?);
 #thay đổi kiểu dữ liệu size
 ALTER TABLE size
     MODIFY COLUMN size varchar(10);
@@ -121,8 +88,6 @@ ALTER TABLE product
     ADD productFlag boolean;
 alter table product
 RENAME COLUMN productFlag to deleteFlag;
-select product.*,c.name as brand from product join category c on product.categoryId = c.id and product.deleteFlag = 0;
-update product set product.deleteFlag = 1 where id = ?;
 # tạo trigger thêm product tự tạo size
 DELIMITER //
 create trigger InsertSize
@@ -140,8 +105,6 @@ create trigger InsertSize
         end;
         //
 DELIMITER ;
-insert into product(name, price, description, status, categoryId,deleteFlag) values ('nike2',3000000,'đen trắng đỏ',0,1,0);
-update size set size=?, quantity=? , productId =? where id =?;
 DELIMITER //
 create trigger InsertImage
     AFTER INSERT ON product
@@ -153,20 +116,8 @@ begin
 end;
 //
 DELIMITER ;
-create table cart (
-        id int primary key auto_increment,
-        productId int,
-        userId int,
-        foreign key (productId) references product (id),
-        foreign key (userId) references user (id)
-)
-select product.*,c.name as brand from product join category c on product.categoryId = c.id and product.deleteFlag = 0 and product.name like ?;
-select product.*,image ,c.name as brand from product
-    join category c on product.categoryId = c.id and product.deleteFlag = 0
-    join image i on product.id = i.productId;
 alter table product add originImage text;
-
-
+#tạo bảng giỏ hàng
 create table cart(
     id int auto_increment primary key,
     productId int,
@@ -180,15 +131,4 @@ alter table orderdetail add sizeId int;
 alter table orderdetail add foreign key (sizeId) references size (id);
 alter table orderdetail add id int primary key  auto_increment;
 alter table orderdetail drop column quantityBuy;
-
-SELECT c.id, c.userId, p.*, s.id , c2.name, s.size, s.quantity FROM cart c JOIN product p ON c.productId = p.id JOIN size s ON c.sizeId = s.id JOIN category c2 on c2.id = p.categoryId and userId=?;
-
-SELECT od.id, od.orderId, p.*, s.id , c2.name, s.size, s.quantity FROM orderdetail od JOIN product p ON od.productId = p.id JOIN size s ON od.sizeId = s.id JOIN category c2 on c2.id = p.categoryId and orderId=?;
-
-SELECT o.*, u.email, u.nickname,u.phone, u.address FROM `order` o join user u on u.id = o.userId;
-
-SELECT od.id, od.orderId, p.*, s.id , c2.name, s.size, s.quantity FROM orderdetail od
-    JOIN product p ON od.productId = p.id
-    JOIN size s ON od.sizeId = s.id
-    JOIN category c2 on c2.id = p.categoryId where orderId = ?;
-
+drop database shoeshoponline;
